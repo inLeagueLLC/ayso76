@@ -1279,7 +1279,8 @@ a.butn.disabled, fieldset:disabled a.butn {
   pointer-events: none
 }
 a.butn-primary {
-color:#000;
+color:#000 !important;
+
 }
 .butn-primary {
   color: #fff;
