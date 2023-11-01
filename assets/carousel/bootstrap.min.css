@@ -1288,7 +1288,7 @@ color:#000 !important;
   border-color: #ef832f
 }
 .butn-primary:hover {
-  color: #fff;
+  color: #fff !important;
   background-color: #D66A16;
   border-color: #D66A16
 }
