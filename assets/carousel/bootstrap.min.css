@@ -4839,6 +4839,9 @@ buttons.close {
   -webkit-perspective: 1000px;
   perspective: 1000px
 }
+.carousel-item.active img {
+  height:80%;
+}
 .carousel-item-next, .carousel-item-prev, .carousel-item.active {
   display: block
 }
