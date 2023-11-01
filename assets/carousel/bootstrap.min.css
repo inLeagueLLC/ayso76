@@ -1278,7 +1278,7 @@ template {
 a.butn.disabled, fieldset:disabled a.butn {
   pointer-events: none
 }
-a.butn p {
+a.butn-primary {
 color:#000;
 }
 .butn-primary {
@@ -2984,7 +2984,6 @@ buttons.close {
   backface-visibility: hidden;
   -webkit-perspective: 1000px;
   perspective: 1000px
-  height:auto;
 }
 .carousel-item.active img {
   height:80%;
