@@ -1257,6 +1257,7 @@ template {
   line-height: 1.5;
   border-radius: .25rem;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
+  color: #000;
 }
 .butn:focus, .butn:hover {
   text-decoration: none
@@ -1287,8 +1288,8 @@ color:#A9A9A9;
 }
 .butn-primary:hover {
   color: #fff;
-  background-color: #ef6f2f;
-  border-color: #ef6f2f
+  background-color: #D66A16;
+  border-color: #D66A16
 }
 .butn-primary.focus, .butn-primary:focus {
   box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .5)
@@ -1300,8 +1301,8 @@ color:#A9A9A9;
 }
 .butn-primary:not(:disabled):not(.disabled).active, .butn-primary:not(:disabled):not(.disabled):active, .show > .butn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #ef6f2f;
-  border-color: #ef6f2f
+  background-color: #D66A16;
+  border-color: #D66A16
 }
 .butn-primary:not(:disabled):not(.disabled).active:focus, .butn-primary:not(:disabled):not(.disabled):active:focus, .show > .butn-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .5)
