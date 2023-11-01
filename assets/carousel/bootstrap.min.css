@@ -4979,7 +4979,7 @@ buttons.close {
   right: 15%;
   left: 15%;
   z-index: 10;
-  bottom:10px;
+  bottom:0px;
   padding-top: 10px;
   padding-bottom: 20px;
   color: #fff;
