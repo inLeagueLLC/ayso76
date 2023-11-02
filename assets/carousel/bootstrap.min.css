@@ -2843,9 +2843,11 @@ textarea.form-control-lg {
 .dropdown, .dropdown-center, .dropend, .dropstart, .dropup, .dropup-center {
   position: relative
 }
+/*Removed this because it broke the wrap of the dropdown menu items in the nav bar.
 .dropdown-toggle {
   white-space: nowrap
 }
+*/
 .dropdown-toggle::after {
   display: inline-block;
   margin-left: .255em;
