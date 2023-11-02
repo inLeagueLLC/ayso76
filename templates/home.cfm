@@ -14,8 +14,8 @@
         <section class="entry-wrapper">
             <div class="container">
                 <div class="body-row">
-                    <div class="col-lg-7 col-md-12 col-sm-12" style="width:100%;">
-                        <div class="entry" style="width:100%;">
+                    <div class="col-lg-7 col-md-12 col-sm-12" style="max-width:1140px;">
+                        <div class="entry" style="max-width:1140px;">
                             <h1 style="text-align:center;">#m.content('title')#</h1>
                             #$.renderEditableAttribute(attribute="body",type="htmlEditor")#
                         </div>
