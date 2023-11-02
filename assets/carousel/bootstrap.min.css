@@ -180,7 +180,7 @@ template {
 .row {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
+  display: block;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   margin-right: -15px;
