@@ -9,8 +9,10 @@
 
   gtag('config', 'UA-1812229-2');
 </script>
+<!-- Begin Bootstrap for the Home Carousel -->
     <link href="#m.siteConfig('ThemeAssetPath')#/assets/carousel/bootstrap.min.css" rel="stylesheet">
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<!-- End Bootstrap for the Home Carousel -->
 <link rel="icon" type="image/png" href="#m.siteConfig('ThemeAssetPath')#/images/favicon/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="#m.siteConfig('ThemeAssetPath')#/images/favicon/favicon-16x16.png" sizes="16x16" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
