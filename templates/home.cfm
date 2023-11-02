@@ -14,19 +14,19 @@
         <section class="entry-wrapper">
             <div class="container">
                 <div class="body-row">
-                    <div class="col-lg-7 col-md-12 col-sm-12">
-                        <div class="entry">
+                    <div class="col-lg-7 col-md-12 col-sm-12" style="width:100%;">
+                        <div class="entry" style="width:100%;">
                             <h1 style="text-align:center;">#m.content('title')#</h1>
                             #$.renderEditableAttribute(attribute="body",type="htmlEditor")#
                         </div>
                     </div>
-//                    <div class="col-lg-5 col-md-12 col-sm-12">
-//                        #m.dspObject(object='component', objectid='Home Quick Links')#
-//                        #m.dspObject(object='component', objectid='Medical Form Release')#
-//                        <div class="vip-program">
-//                            #m.dspObject(object='component', objectid='VIP')#
-//                        </div>
-//                    </div>
+<!--                    <div class="col-lg-5 col-md-12 col-sm-12">
+                        #m.dspObject(object='component', objectid='Home Quick Links')#
+                        #m.dspObject(object='component', objectid='Medical Form Release')#
+                        <div class="vip-program">
+                            #m.dspObject(object='component', objectid='VIP')#
+                        </div>
+                    </div>-->
                 </div>
             </div>
         </section>
