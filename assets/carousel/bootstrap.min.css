@@ -1665,7 +1665,7 @@ progress {
     -webkit-overflow-scrolling: touch
   }
   .carousel-item img {
-    margin-bottom:15px
+    margin-bottom:20px
   }
 }
 @media (max-width:767.98px) {
