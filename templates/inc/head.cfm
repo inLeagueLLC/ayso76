@@ -9,6 +9,7 @@
 
   gtag('config', 'UA-1812229-2');
 </script>
+    <link href="#m.siteConfig('ThemeAssetPath')#/assets/carousel/bootstrap.min.css" rel="stylesheet">
 
 <link rel="icon" type="image/png" href="#m.siteConfig('ThemeAssetPath')#/images/favicon/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="#m.siteConfig('ThemeAssetPath')#/images/favicon/favicon-16x16.png" sizes="16x16" />
