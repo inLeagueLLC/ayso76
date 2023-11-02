@@ -2987,10 +2987,10 @@ buttons.close {
   perspective: 1000px
 }
 .carousel-item.active img {
-  max-height:300px;
+  max-height:350px;
 }
 .carousel-item img {
-  max-height:300px;
+  max-height:350px;
 }
 .carousel-item-next, .carousel-item-prev, .carousel-item.active {
   display: block
