@@ -2988,7 +2988,7 @@ buttons.close {
   perspective: 1000px
 }
 .carousel-item.active img {
-  max-height:400px;
+  max-height:500px;
 }
 .carousel-item-next, .carousel-item-prev, .carousel-item.active {
   display: block
