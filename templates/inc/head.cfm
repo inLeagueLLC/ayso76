@@ -20,13 +20,5 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>#m.content('title')#</title>
 
-<!--Begin section for slider -->
-<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
-
-    <link href="#m.siteConfig('ThemeAssetPath')#/assets/carousel/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="#m.siteConfig('ThemeAssetPath')#/assets/carousel/carousel.css" rel="stylesheet">
-<!--End section for slider -->
 </head>
 </cfoutput>
