@@ -128,6 +128,21 @@
         </cfif>
         </ul>
     </li>
+    <li class="nav-item dropdown-toggle"><a class="nav-link" href="/post-season">Post Season</a>
+        <ul class="dropdown-menu dropdown-left">
+            <cfset feed = $.getBean('feed').loadBy(name='PostSeasonSubNavItem')>
+            <cfset it = feed.getIterator()>
+            <cfif it.hasNext()>
+            <cfloop condition="it.hasNext()">
+            <cfset item = it.next()>
+                <li<cfif $.content('contentid') eq item.getContentID()> class="active current"</cfif>>
+                    <a target="#item.getTarget()#" href="#item.getURL()#">#HTMLEditFormat(item.getMenuTitle())#</a>
+                    #$.dspNestedNav(contentID=item.getContentID(), viewDepth=2)#
+                </li>
+            </cfloop>
+            </cfif>
+        </ul>
+    </li>
     <li class="nav-item dropdown-toggle"><a class="nav-link" href="/extra">Extra</a>
         <ul class="dropdown-menu dropdown-left">
             <cfset feed = $.getBean('feed').loadBy(name='ExtraSubNavItem')>
@@ -143,9 +158,9 @@
             </cfif>
         </ul>
     </li>
-    <li class="nav-item dropdown-toggle"><a class="nav-link" href="/post-season">Post Season</a>
+        <li class="nav-item dropdown-toggle"><a class="nav-link" href="/alliance">Alliance</a>
         <ul class="dropdown-menu dropdown-left">
-            <cfset feed = $.getBean('feed').loadBy(name='PostSeasonSubNavItem')>
+            <cfset feed = $.getBean('feed').loadBy(name='AllianceSubNavItem')>
             <cfset it = feed.getIterator()>
             <cfif it.hasNext()>
             <cfloop condition="it.hasNext()">
