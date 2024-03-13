@@ -1,5 +1,11 @@
 <cfoutput>
 <head>
+
+<!-- Force refresh of the page on every load. -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<!-- End force refresh on load section -->
 <!-- Begin Constant Contact Active Forms -->
 <script> var _ctct_m = "5311d8bb7b81cf49a91ff666f7438063"; </script>
 <script id="signupScript" src="//static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js" async defer></script>
