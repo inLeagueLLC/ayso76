@@ -484,6 +484,10 @@ footer {
 
 /* Breakpoints */
 @media screen and (min-width: 1200px) and (max-width: 1490px) {
+  .carousel-item a {
+    font-size:2.5em;
+  }
+  
   #navbarNav .nav-list li {
     padding: 0 22px 0 12px; }
 
