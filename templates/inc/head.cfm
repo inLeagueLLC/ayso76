@@ -24,6 +24,12 @@
     <link href="#m.siteConfig('ThemeAssetPath')#/assets/carousel/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- End Bootstrap for the Home Carousel -->
+<!-- Begin for the Splide Carousel -->
+    <link href="#m.siteConfig('ThemeAssetPath')#/assets/splide/splide.min.css" rel="stylesheet">
+    <link href="#m.siteConfig('ThemeAssetPath')#/assets/splide/splide-default.min.css" rel="stylesheet">
+    <link href="#m.siteConfig('ThemeAssetPath')#/assets/splide/splide-core.min.css" rel="stylesheet">
+<script src="#m.siteConfig('ThemeAssetPath')#/assets/splide/splide.min.js"></script>
+<!-- End for the Splide Carousel -->
 <link rel="icon" type="image/png" href="#m.siteConfig('ThemeAssetPath')#/images/favicon/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="#m.siteConfig('ThemeAssetPath')#/images/favicon/favicon-16x16.png" sizes="16x16" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
