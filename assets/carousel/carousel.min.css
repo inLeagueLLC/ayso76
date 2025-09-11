@@ -1,30 +1,40 @@
+/* --- Global fixes for mobile overflow --- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* Wrapper */
+.r76-wrap{max-width:100%;margin:0 auto;position:relative;font-family:Arial, sans-serif;overflow-x:hidden}
+
+/* Carousel core */
+.carousel{position:relative;width:100%;max-width:100%;overflow:hidden;touch-action:pan-y}
+.carousel-track{display:flex;transition:transform .5s ease-in-out;max-width:100%}
+.carousel-slide{min-width:100%;position:relative;max-width:100%}
+
+/* Images: responsive, never exceed viewport width */
+.carousel-slide img{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+  max-height:100vh;
+  object-fit:contain;
+}
+
+/* Full-width caption band pinned to bottom (no translateX) */
+.caption{
+  position:absolute;left:0;right:0;bottom:0;z-index:10;
+  display:flex;flex-direction:column;justify-content:flex-end;text-align:center;color:#fff;
+  padding:20px;background:linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,0));
+  opacity:0;transition:opacity .6s ease
+}
+
+/* One-line, JS-autofit text (we start at max; JS shrinks if needed) */
 :root{
   --r76-title-max: 76px;
   --r76-title-min: 16px;
   --r76-subtitle-max: 38px;
   --r76-subtitle-min: 14px;
 }
-
-/* Wrapper */
-.r76-wrap{max-width:100%;margin:0 auto;position:relative;font-family:Arial, sans-serif}
-
-/* Carousel core */
-.carousel{position:relative;width:100%;overflow:hidden;touch-action:pan-y}
-.carousel-track{display:flex;transition:transform .5s ease-in-out}
-.carousel-slide{min-width:100%;position:relative}
-
-/* Images: responsive, no crop */
-.carousel-slide img{width:100%;height:auto;max-height:100vh;object-fit:contain;display:block}
-
-/* Full-width caption band pinned to bottom */
-.caption{
-  position:absolute;left:50%;transform:translateX(-50%);width:100%;bottom:0;z-index:10;
-  display:flex;flex-direction:column;justify-content:flex-end;text-align:center;color:#fff;
-  padding:20px;background:linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,0));
-  opacity:0;transition:opacity .6s ease
-}
-
-/* One-line, JS-autofit text (start at max sizes) */
 .caption h2{
   margin:0;font-size:var(--r76-title-max);line-height:1.2;
   text-shadow:3px 3px 8px rgba(0,0,0,.95);
