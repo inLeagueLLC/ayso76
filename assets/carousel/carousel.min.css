@@ -4,18 +4,25 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
 /* Wrapper */
 /* Elevate the whole slider */
+/* Floating slider: no background, deeper multi-layer shadow */
 .r76-wrap{
   max-width:100%;
-  margin:0 auto;                 /* keep your existing spacing */
+  margin:0 auto;
   position:relative;
   font-family:Arial, sans-serif;
 
-  /* prevent any horizontal overflow on mobile */
-  overflow:hidden;               /* clips corners + stops sideways scroll */
+  /* keep corners + prevent horizontal overflow */
+  overflow:hidden;
+  border-radius:12px;
 
-  /* new: shadow + rounded corners + background for edge blends */
-  box-shadow: 0 12px 28px rgba(0,0,0,.18), 0 4px 12px rgba(0,0,0,.12);
-  border-radius:12px;            /* set to 0 for square corners */
+  /* no fill behind the slider */
+  background:transparent;
+
+  /* deeper, floating-style shadow */
+  box-shadow:
+    0 24px 60px rgba(0,0,0,.32),
+    0 12px 28px rgba(0,0,0,.22),
+    0 3px 10px rgba(0,0,0,.14);
 }
 
 /* Carousel core */
