@@ -1,11 +1,7 @@
-/* --- Global fixes for mobile overflow --- */
+/* --- Global fixes for mobile overflow and text scaling --- */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
-/* Wrapper */
-/* Elevate the whole slider */
-/* Floating slider: no background, deeper multi-layer shadow */
-/* Floating slider with bottom-only shadow (no background fill) */
 /* Floating slider with bottom-only shadow + thin border */
 .r76-wrap{
   max-width:100%;
@@ -14,14 +10,13 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   font-family:Arial, sans-serif;
 
   border-radius:12px;
-  overflow:hidden;
-  background:transparent;
+  overflow:hidden;                 /* clip corners and internals */
+  background:transparent;          /* no fill */
 
-  /* border: thin, neutral */
-  border:1px solid rgba(0,0,0,.14);
+  border:1px solid rgba(0,0,0,.14);/* thin border around slider */
 
-  /* bottom-only shadow via drop-shadow */
-  box-shadow:none; /* ensure old box-shadow is off */
+  /* bottom-only “lift” shadow via drop-shadow (downward offsets) */
+  box-shadow:none;
   filter:
     drop-shadow(0 30px 60px rgba(0,0,0,.32))
     drop-shadow(0 12px 24px rgba(0,0,0,.18));
@@ -46,11 +41,12 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .caption{
   position:absolute;left:0;right:0;bottom:0;z-index:10;
   display:flex;flex-direction:column;justify-content:flex-end;text-align:center;color:#fff;
-  padding:20px;background:linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,0));
-  opacity:0;transition:opacity .6s ease
+  padding:20px;
+  background:linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,0));
+  opacity:0;transition:opacity .6s ease;
 }
 
-/* One-line, JS-autofit text (we start at max; JS shrinks if needed) */
+/* One-line, JS-autofit text (start at max; JS shrinks if needed) */
 :root{
   --r76-title-max: 76px;
   --r76-title-min: 16px;
@@ -73,13 +69,26 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .carousel-button.prev{left:15px}.carousel-button.next{right:15px}
 .carousel-button img{width:40px;height:40px}
 
-/* Thumbnails strip */
-.carousel-nav{display:flex;justify-content:flex-start;gap:10px;padding:15px;background:#fff;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;scroll-snap-type:x mandatory}
+/* Hide arrows on touch devices */
+@media (pointer: coarse) {
+  .carousel-button { display: none !important; }
+}
+
+/* Thumbnails strip: smooth, touch-friendly scrolling */
+.carousel-nav{
+  display:flex;justify-content:flex-start;gap:10px;padding:15px;background:#fff;
+  overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+  scroll-snap-type:x proximity;scroll-behavior:smooth;-webkit-overflow-scrolling:touch
+}
 .carousel-nav::-webkit-scrollbar{display:none}
-.carousel-nav img{flex:0 0 auto;width:120px;max-width:20vw;height:auto;cursor:pointer;border:3px solid transparent;border-radius:4px;transition:border .3s,opacity .3s;scroll-snap-align:start}
+.carousel-nav img{
+  flex:0 0 auto;width:120px;max-width:20vw;height:auto;cursor:pointer;
+  border:3px solid transparent;border-radius:4px;transition:border .3s,opacity .3s;
+  scroll-snap-align:center
+}
 .carousel-nav img:hover{opacity:.6}
 .carousel-nav img.active{border:3px solid #333}
 
-/* Responsive arrow sizing */
+/* Responsive arrow sizing (desktop only; hidden on touch anyway) */
 @media (max-width:768px){.carousel-button img{width:45px;height:45px}}
 @media (max-width:480px){.carousel-button img{width:50px;height:50px}}
