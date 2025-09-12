@@ -2,9 +2,9 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
-/* Floating slider with bottom-only shadow + thin border */
+/* Floating slider with bottom-only shadow + thin border; width ≤1600px */
 .r76-wrap{
-  width: min(99vw, 1600px);  /* 99% of viewport, capped at 1600px */
+  width: min(99vw, 1600px);
   max-width: 1600px;
   margin: 0 auto;
   position: relative;
@@ -12,11 +12,11 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
   border-radius: 12px;
   overflow: hidden;                 /* clip corners and internals */
-  background: transparent;
+  background: transparent;          /* no fill */
 
   border: 1px solid rgba(0,0,0,.14);/* thin border */
 
-  /* bottom-only “lift” shadow via drop-shadow */
+  /* bottom-only “lift” shadow via drop-shadow (downward offsets) */
   box-shadow: none;
   filter:
     drop-shadow(0 30px 60px rgba(0,0,0,.32))
@@ -65,13 +65,19 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   white-space:nowrap;overflow:hidden
 }
 
+/* Make caption text visually “link-like” (whole slide is already a link) */
+.carousel-slide > a{display:block;position:relative;color:inherit;text-decoration:none;outline:none;cursor:pointer}
+.caption h2, .caption p{ text-decoration: underline; text-underline-offset: .15em; text-decoration-thickness: from-font; }
+.carousel-slide > a:hover .caption h2, .carousel-slide > a:hover .caption p{ text-decoration-color: rgba(255,255,255,.95); filter: brightness(1.05); }
+.carousel-slide > a:focus-visible{ outline:2px solid rgba(255,255,255,.9); outline-offset:4px; border-radius:8px; }
+
 /* Arrows */
 .carousel-button{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;padding:0;cursor:pointer;z-index:20}
 .carousel-button.prev{left:15px}.carousel-button.next{right:15px}
 .carousel-button img{width:40px;height:40px}
 
-/* Hide arrows on touch devices */
-@media (pointer: coarse) {
+/* Hide arrows on the smallest windows */
+@media (max-width: 480px) {
   .carousel-button { display: none !important; }
 }
 
@@ -90,6 +96,5 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .carousel-nav img:hover{opacity:.6}
 .carousel-nav img.active{border:3px solid #333}
 
-/* Responsive arrow sizing (desktop only; hidden on touch anyway) */
+/* Arrow size tweak for smaller laptops/tablets (if visible) */
 @media (max-width:768px){.carousel-button img{width:45px;height:45px}}
-@media (max-width:480px){.carousel-button img{width:50px;height:50px}}
