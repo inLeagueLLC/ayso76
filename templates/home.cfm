@@ -13,7 +13,7 @@
         </section>
         <section class="entry-wrapper">
             <div class="container" style="max-width:1600px;">
-                <div class="row">
+                <!--<div class="row">-->
                             <h1 style="text-align:center;">#m.content('title')#</h1>
                             #$.renderEditableAttribute(attribute="body",type="htmlEditor")#
                 </div>
