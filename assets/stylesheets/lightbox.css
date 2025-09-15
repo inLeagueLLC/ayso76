@@ -53,13 +53,14 @@
 }
 
 /* --------------------------
-   Image wrapper
+   Transform wrapper
 -------------------------- */
-#overlay-img-wrapper {
+#overlay-transform {
   position: relative;
   display: inline-block;
   max-width: 90%;
   max-height: 80%;
+  transform-origin: center center;
 }
 
 /* Expanded image */
@@ -68,9 +69,9 @@
   max-height: 100%;
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  display: block;
   cursor: grab;
   transition: transform 0.3s ease;
-  display: block;
 }
 
 /* --------------------------
@@ -82,11 +83,11 @@
   right: 8px;
   font-size: 24px;
   color: #fff;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.5); /* subtle background for visibility */
   border-radius: 50%;
   padding: 4px 10px;
   cursor: pointer;
-  opacity: 0.5; /* idle dim default */
+  opacity: 0.7;
   transition: opacity 0.3s ease, transform 0.3s ease;
   user-select: none;
 }
@@ -96,14 +97,18 @@
 -------------------------- */
 #overlay-title {
   position: absolute;
-  bottom: -32px;   /* sits just below image wrapper */
+  bottom: -40px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.3rem;
   font-weight: bold;
   color: #fff;
   white-space: nowrap;
-  opacity: 0.7; /* idle default */
+  opacity: 0.9;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.4); /* translucent background */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3); /* soft shadow */
   transition: opacity 0.3s ease;
 }
 
