@@ -30,9 +30,8 @@ p {
 h1, h4, h5, h6 {
   font-family: 'Fjalla One', sans-serif; }
 
-//#home_heading {
-//  font-size: clamp(1.5em, 2vw + 1em, 2.425em);
-//  line-height: clamp(2rem, 1vw + 2.5rem, 3.75rem);}
+#home_heading {
+  font-size: clamp(24px, 32px, 38.8px);}
 
 h1 {
   text-transform: uppercase;
@@ -488,8 +487,6 @@ footer {
 
 /* Breakpoints */
 @media screen and (min-width: 1200px) and (max-width: 1490px) {
-  #home_heading {
-  font-size: 2.425em;}
 
   #navbarNav .nav-list li {
     padding: 0 22px 0 12px; }
@@ -501,8 +498,6 @@ footer {
     padding-right: 6px; } }
 
 @media screen and (max-width: 1200px) {
-  #home_heading {
-  font-size: 2.2em;}
 
   #navbarNav .nav-list li > a {
     font-size: .9em; }
@@ -517,8 +512,6 @@ footer {
   #navbarNav .nav-list li {
     padding: 0 20px 0 13px; } }
 @media screen and (max-width: 1024px) and (max-width: 992px) {
-  #home_heading {
-  font-size: 2.0em;}
 
   nav.navbar {
     justify-content: initial;
@@ -566,8 +559,6 @@ footer {
       max-width: 100%;
       flex: 100%; } }
 @media screen and (max-width: 769px) {
-  #home_heading {
-  font-size: 1.7em;}
   
   nav.navbar {
     justify-content: initial;
@@ -622,8 +613,6 @@ footer {
   .navbar .align-right {
     float: none; } }
 @media screen and (max-width: 767px) {
-  #home_heading {
-  font-size: 1.5em;}
 
   .info-banner {
     display: none; }
