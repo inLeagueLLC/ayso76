@@ -151,6 +151,13 @@ html {
 .carousel-nav img.active {
   border: 3px solid #333;
 }
+.caption {
+  -webkit-user-select: none; /* Safari/Chrome */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* IE/Edge */
+  user-select: none;         /* Standard */
+}
+
 
 /* Countdown timer */
 #demo {
