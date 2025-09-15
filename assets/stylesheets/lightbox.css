@@ -133,10 +133,12 @@
   transition: opacity 0.3s ease;
 }
 
-/* Touch behavior: let JS handle pinch/pan */
-#overlay, #overlay-img-wrapper, #overlay-img {
-  touch-action: none;
-  -ms-touch-action: none;
+/* === Touch behavior === */
+#overlay,
+#overlay-img-wrapper,
+#overlay-img {
+  touch-action: none;       /* let JS handle pinch and pan */
+  -ms-touch-action: none;   /* old Edge */
 }
 
 /* Prevent page scroll when overlay open */
