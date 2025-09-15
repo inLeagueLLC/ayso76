@@ -1,9 +1,7 @@
-/* --------------------------
-   Thumbnail styles
--------------------------- */
+/* === Thumbnails === */
 .thumb-container {
-  margin: 20px 0;
   text-align: center;
+  margin: 20px 0;
 }
 
 .thumb-container h3 {
@@ -13,88 +11,76 @@
 }
 
 .thumb-container img {
-  width: 200px;
-  height: auto;
+  max-width: 200px;
+  height: auto;              /* keep proportions */
   cursor: pointer;
-  border-radius: 4px;
-  box-shadow: 0 0 4px rgba(0,0,0,0.2);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .thumb-container img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3),
-                0 0 6px rgba(255,255,255,0.25);
-  }
+.thumb-container img:hover {
+  transform: scale(1.05);
 }
 
-/* --------------------------
-   Overlay container
--------------------------- */
+/* === Overlay === */
 #overlay {
+  display: none;
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  display: flex;
-  flex-direction: column;
+  background: rgba(0,0,0,0.8);
   justify-content: center;
   align-items: center;
-  background: rgba(0,0,0,0.8);
   z-index: 9999;
-  opacity: 0;
-  pointer-events: none;
-  transition: background 0.3s ease, opacity 0.3s ease;
+  transition: background 0.3s ease;
 }
 
 #overlay.active {
-  opacity: 1;
-  pointer-events: auto;
+  display: flex;
 }
 
-/* --------------------------
-   Transform wrapper
--------------------------- */
-#overlay-transform {
+/* Wrapper for image + controls */
+#overlay-img-wrapper {
   position: relative;
   display: inline-block;
   max-width: 90%;
   max-height: 80%;
-  transform-origin: center center;
+  text-align: center;
 }
 
-/* Expanded image */
+/* Enlarged image */
 #overlay-img {
   max-width: 100%;
-  max-height: 100%;
+  height: auto;
+  display: block;
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-  display: block;
-  cursor: grab;
   transition: transform 0.3s ease;
+  cursor: grab;
 }
 
-/* --------------------------
-   Close button
--------------------------- */
+/* Close button (X) */
 #close-btn {
   position: absolute;
   top: 8px;
   right: 8px;
   font-size: 24px;
   color: #fff;
-  background: rgba(0,0,0,0.5); /* subtle background for visibility */
+  background: rgba(0,0,0,0.5);
   border-radius: 50%;
   padding: 4px 10px;
   cursor: pointer;
   opacity: 0.7;
-  transition: opacity 0.3s ease, transform 0.3s ease;
   user-select: none;
+  transition: opacity 0.3s ease;
 }
 
-/* --------------------------
-   Title (anchored below image)
--------------------------- */
+#close-btn:hover {
+  opacity: 1;
+}
+
+/* Title below image */
 #overlay-title {
   position: absolute;
   bottom: -40px;
@@ -104,38 +90,56 @@
   font-weight: bold;
   color: #fff;
   white-space: nowrap;
-  opacity: 0.9;
   padding: 4px 10px;
   border-radius: 6px;
-  background: rgba(0, 0, 0, 0.4); /* translucent background */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3); /* soft shadow */
+  background: rgba(0,0,0,0.4);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  opacity: 0.9;
   transition: opacity 0.3s ease;
 }
 
-/* --------------------------
-   Arrows
--------------------------- */
+/* Navigation arrows */
 #nav-left, #nav-right {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   font-size: 40px;
   color: #fff;
-  background: rgba(0,0,0,0.5);
-  border-radius: 50%;
-  padding: 8px 14px;
   cursor: pointer;
-  opacity: 0.5; /* idle dim default */
-  transition: opacity 0.3s ease, transform 0.3s ease;
   user-select: none;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+#nav-left:hover, #nav-right:hover {
+  opacity: 1;
 }
 
 #nav-left { left: 20px; }
 #nav-right { right: 20px; }
 
-/* Hide arrows on touch devices */
+/* Hide arrows on small/touch devices */
 @media (hover: none) and (pointer: coarse) {
   #nav-left, #nav-right {
     display: none;
   }
+}
+
+/* Auto-dim support (JS sets opacity) */
+#overlay-title,
+#close-btn,
+#nav-left,
+#nav-right {
+  transition: opacity 0.3s ease;
+}
+
+/* Touch behavior: let JS handle pinch/pan */
+#overlay, #overlay-img-wrapper, #overlay-img {
+  touch-action: none;
+  -ms-touch-action: none;
+}
+
+/* Prevent page scroll when overlay open */
+body.no-scroll {
+  overflow: hidden;
 }
