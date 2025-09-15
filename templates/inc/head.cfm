@@ -24,7 +24,7 @@
     <link href="#m.siteConfig('ThemeAssetPath')#/assets/stylesheets/carousel.css" rel="stylesheet">
 <!-- End for the Home Carousel -->
 <!-- Begin for the Image Lightbox -->
-<link rel="stylesheet" href=""#m.siteConfig('ThemeAssetPath')#/assets/stylesheets/lightbox.css">
+    <link href="#m.siteConfig('ThemeAssetPath')#/assets/stylesheets/lightbox.css" rel="stylesheet">
 <!-- End for the Image Lightbox -->
 <link rel="icon" type="image/png" href="#m.siteConfig('ThemeAssetPath')#/images/favicon/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="#m.siteConfig('ThemeAssetPath')#/images/favicon/favicon-16x16.png" sizes="16x16" />
