@@ -127,13 +127,15 @@ img {
    ================================ */
 .slide {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
+  transform: translateX(0);
   transition: transform 0.45s ease-in-out, opacity 0.45s ease-in-out;
 
-  /* ✅ fix: slides don't block background */
+  /* ✅ allow background clicks through slide */
   pointer-events: none;
 }
 
@@ -142,10 +144,10 @@ img {
   z-index: 2;
 }
 
-.slide.from-right { transform: translate(50%, -50%); }
-.slide.from-left  { transform: translate(-150%, -50%); }
-.slide.to-left    { transform: translate(-150%, -50%); opacity: 0; z-index: 1; }
-.slide.to-right   { transform: translate(50%, -50%);  opacity: 0; z-index: 1; }
+.slide.from-right { transform: translateX(100%); }
+.slide.from-left  { transform: translateX(-100%); }
+.slide.to-left    { transform: translateX(-100%); opacity: 0; z-index: 1; }
+.slide.to-right   { transform: translateX(100%);  opacity: 0; z-index: 1; }
 
 .slide img {
   max-width: 90vw;
@@ -154,7 +156,7 @@ img {
   box-shadow: 0 8px 24px rgba(0,0,0,0.6);
   border-radius: 4px;
 
-  /* ✅ only the image is interactive */
+  /* ✅ only the image itself is interactive */
   pointer-events: auto;
 }
 
@@ -181,10 +183,10 @@ img {
    ================================ */
 .btn-close {
   position: absolute;
-  left: 0;   /* set by JS */
-  top: 0;    /* set by JS */
+  left: 0;   /* set dynamically */
+  top: 0;    /* set dynamically */
   opacity: 0;
-  pointer-events: auto; /* ✅ always tappable */
+  pointer-events: auto;
   z-index: 2000;
 
   font-size: clamp(1.1rem, 3vw, 1.6rem);
@@ -198,11 +200,12 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s ease, transform 0.2s ease, opacity 0.15s ease;
+  transition: background 0.2s ease, transform 0.2s ease, opacity 0.15s ease, color 0.2s ease;
 }
 
 .btn-close:hover {
   background: rgba(0,0,0,0.65);
+  color: #ff4444;   /* ✅ red on hover restored */
   transform: scale(1.06);
 }
 
