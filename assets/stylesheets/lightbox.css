@@ -61,12 +61,20 @@ img {
   cursor: pointer;
   border: 2px solid #ddd;
   border-radius: 6px;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);   /* default shadow */
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .thumb-block img.thumb:hover {
   transform: scale(1.03);
   border-color: #aaa;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);  /* stronger hover shadow */
+}
+
+.thumb-block img.thumb:active {
+  transform: scale(0.98);                  /* pressed down */
+  border-color: #666;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);   /* flatter shadow */
 }
 
 /* ================================
@@ -113,6 +121,10 @@ img {
   width: 100%;
   height: 100%;
   overflow: hidden;
+
+  display: flex;                /* center content with flex */
+  align-items: center;
+  justify-content: center;
   min-height: 0;
 }
 
@@ -120,22 +132,15 @@ img {
    Slides
    ================================ */
 .slide {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  position: relative;
+  opacity: 0;                   /* hidden unless active */
+  transition: opacity 0.3s ease;
 }
 
 .slide.center {
-  opacity: 1 !important;
+  opacity: 1 !important;        /* visible */
   z-index: 2;
 }
-
-.slide.from-right { transform: translate(100%, -50%); }
-.slide.from-left  { transform: translate(-200%, -50%); }
-.slide.to-left    { transform: translate(-200%, -50%); opacity: 0; z-index: 1; }
-.slide.to-right   { transform: translate(100%, -50%);  opacity: 0; z-index: 1; }
 
 .slide img {
   max-width: 90vw;
@@ -144,6 +149,10 @@ img {
   display: block;
   opacity: 1 !important;
   visibility: visible !important;
+
+  /* shadow around lightbox image */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  border-radius: 4px;
 }
 
 /* ================================
@@ -176,7 +185,7 @@ img {
 }
 
 .btn-close {
-  position: absolute;
+  position: fixed;                /* stick to viewport corner */
   top: clamp(8px, 2vw, 20px);
   right: clamp(8px, 2vw, 20px);
   font-size: clamp(1.25rem, 4vw, 2rem);
@@ -185,7 +194,7 @@ img {
   background: transparent;
   border: none;
   cursor: pointer;
-  z-index: 1000;
+  z-index: 10000;
   opacity: 0;
   transition: color 0.2s ease, transform 0.2s ease;
 }
