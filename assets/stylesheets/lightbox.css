@@ -177,3 +177,8 @@
   visibility: visible !important;
   display: block !important;
 }
+.slide.center img {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
