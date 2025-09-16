@@ -1,5 +1,5 @@
 /* ================================
-   Global Reset & Base
+   Base Reset
    ================================ */
 *,
 *::before,
@@ -23,25 +23,14 @@ img {
   display: block;
 }
 
-.visually-hidden {
-  position: absolute !important;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  border: 0;
-}
-
 /* ================================
-   Thumbnail Gallery
+   Gallery
    ================================ */
 .gallery {
   display: flex;
   flex-direction: column;
-  gap: clamp(16px, 3vw, 32px);
-  padding: clamp(12px, 4vw, 40px);
+  gap: 24px;
+  padding: 24px;
 }
 
 .thumb-block {
@@ -50,7 +39,7 @@ img {
 
 .thumb-block h3 {
   font-weight: bold;
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: 1.2rem;
   margin-bottom: 8px;
 }
 
@@ -106,10 +95,9 @@ img {
   position: relative;
   width: 100vw;
   height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr;
+  display: flex;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
 }
 
 .slide-stage {
@@ -123,7 +111,7 @@ img {
 }
 
 /* ================================
-   Slides & Transitions
+   Slides
    ================================ */
 .slide {
   position: absolute;
@@ -134,14 +122,14 @@ img {
   opacity: 0;
   transform: translateX(0);
   transition: transform 0.45s ease-in-out, opacity 0.45s ease-in-out;
-
-  /* ✅ allow background clicks through slide */
-  pointer-events: none;
+  pointer-events: none; /* let clicks through except image */
 }
 
 .slide.center {
   opacity: 1 !important;
+  transform: translateX(0) !important;
   z-index: 2;
+  pointer-events: auto; /* active slide is interactive */
 }
 
 .slide.from-right { transform: translateX(100%); }
@@ -155,41 +143,17 @@ img {
   object-fit: contain;
   box-shadow: 0 8px 24px rgba(0,0,0,0.6);
   border-radius: 4px;
-
-  /* ✅ only the image itself is interactive */
   pointer-events: auto;
 }
 
 /* ================================
-   Lightbox Title
-   ================================ */
-.lightbox-title {
-  color: #fff;
-  font-weight: bold;
-  text-align: center;
-  font-size: clamp(1rem, 2vw, 1.5rem);
-  margin-bottom: clamp(8px, 2vw, 20px);
-  opacity: 0;
-  animation: fadeInTitle 0.3s ease forwards;
-}
-
-@keyframes fadeInTitle {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ================================
-   Close Button (positioned by JS)
+   Close Button
    ================================ */
 .btn-close {
   position: absolute;
-  left: 0;   /* set dynamically */
-  top: 0;    /* set dynamically */
-  opacity: 0;
-  pointer-events: auto;
-  z-index: 2000;
-
-  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  top: 16px;
+  right: 16px;
+  font-size: 1.4rem;
   font-weight: bold;
   color: #fff;
   background: rgba(0,0,0,0.45);
@@ -200,38 +164,40 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s ease, transform 0.2s ease, opacity 0.15s ease, color 0.2s ease;
+  z-index: 2000;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
 }
 
 .btn-close:hover {
   background: rgba(0,0,0,0.65);
-  color: #ff4444;   /* ✅ red on hover restored */
+  color: #ff4444; /* red hover */
   transform: scale(1.06);
 }
 
 /* ================================
-   Navigation Arrows
+   Arrows
    ================================ */
 .control.btn-prev,
 .control.btn-next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-size: 2rem;
   font-weight: bold;
   color: #fff;
   background: rgba(0,0,0,0.3);
   border: none;
   cursor: pointer;
-  padding: clamp(6px, 1.5vw, 12px);
+  padding: 10px;
   z-index: 1000;
   opacity: 0;
   transition: background 0.2s ease, transform 0.2s ease;
   animation: fadeInControls 0.3s ease forwards 0.3s;
 }
 
-.control.btn-prev { left: clamp(8px, 2vw, 20px); }
-.control.btn-next { right: clamp(8px, 2vw, 20px); }
+.control.btn-prev { left: 16px; }
+.control.btn-next { right: 16px; }
 
 .control.btn-prev:hover,
 .control.btn-next:hover {
