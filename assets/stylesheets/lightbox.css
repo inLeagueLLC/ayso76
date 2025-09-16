@@ -124,3 +124,7 @@
 
 /* Prevent scroll */
 body.no-scroll { overflow: hidden; }
+#overlay-img {
+  border: 5px solid red !important;
+}
+
