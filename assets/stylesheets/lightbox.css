@@ -70,7 +70,7 @@
   #close-btn { font-size: 32px; padding: 8px 14px; top: 12px; right: 12px; }
 }
 
-/* Smooth Slide Animations */
+/* Smooth Slide Animations (stagger) */
 .slide-in-left, 
 .slide-in-right, 
 .slide-out-left, 
