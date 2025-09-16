@@ -70,12 +70,20 @@
   #close-btn { font-size: 32px; padding: 8px 14px; top: 12px; right: 12px; }
 }
 
-/* Slide Animations */
+/* Smooth Slide Animations */
+.slide-in-left, 
+.slide-in-right, 
+.slide-out-left, 
+.slide-out-right, 
+.slide-active {
+  transition: transform 0.35s ease-in-out, opacity 0.35s ease-in-out;
+  will-change: transform, opacity;
+}
+
 .slide-in-left  { transform: translateX(-100%); opacity: 0; }
 .slide-in-right { transform: translateX(100%);  opacity: 0; }
 .slide-out-left { transform: translateX(-100%); opacity: 0; }
 .slide-out-right{ transform: translateX(100%);  opacity: 0; }
-.slide-active   { transform: translateX(0);     opacity: 1;
-                  transition: transform 0.4s ease, opacity 0.4s ease; }
+.slide-active   { transform: translateX(0);     opacity: 1; }
 
 body.no-scroll { overflow: hidden; }
