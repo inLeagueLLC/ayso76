@@ -29,16 +29,15 @@
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  touch-action: none; /* we'll manage gestures with Pointer Events */
+  touch-action: none;
 }
 .lightbox.open { display: flex; }
 
-/* Container keeps transforms separate from overlay clicks */
 .viewer {
   position: relative;
   max-width: 80vw;
   max-height: 80vh;
-  width: 80vw;             /* “80% of full screen” */
+  width: 80vw;
   height: 80vh;
   overflow: hidden;
   border-radius: 12px;
@@ -46,7 +45,6 @@
   box-shadow: 0 10px 40px rgba(0,0,0,.5);
 }
 
-/* Image wrapper is what we pan/zoom/animate */
 .slide-stage {
   width: 100%;
   height: 100%;
@@ -71,7 +69,7 @@
   max-height: 100%;
   user-select: none;
   -webkit-user-drag: none;
-  pointer-events: none; /* interactions handled on stage */
+  pointer-events: none;
 }
 
 /* --- Controls --- */
@@ -93,16 +91,13 @@
 }
 .control:hover { background: rgba(255,255,255,.25); }
 .control:active { transform: translateY(-50%) scale(.96); }
-
 .btn-prev { left: -60px; }
 .btn-next { right: -60px; }
 
-/* Hide arrows on coarse pointers (touch-first devices) */
 @media (pointer: coarse) {
   .btn-prev, .btn-next { display: none; }
 }
 
-/* Close button */
 .btn-close {
   position: absolute;
   top: -54px; right: -4px;
@@ -116,7 +111,6 @@
 }
 .btn-close:hover { background: rgba(255,255,255,.25); }
 
-/* If there’s not enough outer space (very small screens), bring controls inside */
 @media (max-width: 640px) {
   .btn-prev { left: 10px; }
   .btn-next { right: 10px; }
@@ -125,7 +119,6 @@
 
 /* --- Slide Animations --- */
 .animate { transition: transform 320ms ease, opacity 320ms ease; }
-
 .from-right { transform: translateX(100%); opacity: 0; }
 .from-left  { transform: translateX(-100%); opacity: 0; }
 .center     { transform: translateX(0); opacity: 1; }
