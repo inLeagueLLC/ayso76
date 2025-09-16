@@ -145,3 +145,16 @@
   padding: 0; margin: -1px; overflow: hidden;
   clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
+/* Improve touch behavior during gestures */
+.lightbox, .viewer, .slide-stage, .zoom-wrap {
+  touch-action: none;           /* prevent browser from hijacking pinch/scroll */
+  -webkit-user-select: none;
+  user-select: none;
+}
+/* Improve touch behavior during gestures */
+.lightbox, .viewer, .slide-stage, .zoom-wrap {
+  touch-action: none;           /* prevent browser from hijacking pinch/scroll */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
