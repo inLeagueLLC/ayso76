@@ -127,28 +127,25 @@ img {
    ================================ */
 .slide {
   position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   opacity: 0;
-  transform: translateX(0);
   transition: transform 0.45s ease-in-out, opacity 0.45s ease-in-out;
 
-  /* 🔑 fix: slides don’t block background taps */
+  /* ✅ fix: slides don't block background */
   pointer-events: none;
 }
 
 .slide.center {
   opacity: 1 !important;
-  transform: translateX(0);
   z-index: 2;
 }
 
-.slide.from-right { transform: translateX(100%); }
-.slide.from-left  { transform: translateX(-100%); }
-.slide.to-left    { transform: translateX(-100%); opacity: 0; z-index: 1; }
-.slide.to-right   { transform: translateX(100%);  opacity: 0; z-index: 1; }
+.slide.from-right { transform: translate(50%, -50%); }
+.slide.from-left  { transform: translate(-150%, -50%); }
+.slide.to-left    { transform: translate(-150%, -50%); opacity: 0; z-index: 1; }
+.slide.to-right   { transform: translate(50%, -50%);  opacity: 0; z-index: 1; }
 
 .slide img {
   max-width: 90vw;
@@ -157,7 +154,7 @@ img {
   box-shadow: 0 8px 24px rgba(0,0,0,0.6);
   border-radius: 4px;
 
-  /* 🔑 fix: image is still interactive */
+  /* ✅ only the image is interactive */
   pointer-events: auto;
 }
 
@@ -184,11 +181,10 @@ img {
    ================================ */
 .btn-close {
   position: absolute;
-  left: 0;   /* dynamically set by JS */
-  top: 0;    /* dynamically set by JS */
-  opacity: 0; /* hidden until positioned */
-  /* 🔑 fix: always tappable */
-  pointer-events: auto;
+  left: 0;   /* set by JS */
+  top: 0;    /* set by JS */
+  opacity: 0;
+  pointer-events: auto; /* ✅ always tappable */
   z-index: 2000;
 
   font-size: clamp(1.1rem, 3vw, 1.6rem);
