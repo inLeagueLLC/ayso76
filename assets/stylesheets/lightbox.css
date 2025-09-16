@@ -7,10 +7,11 @@
   color: #222;
 }
 .thumb-block { margin: 20px 0 28px; }
+/* Center thumbnail headers */
 .thumb-block h3 {
-  margin: 0 0 8px;
-  font-size: 1.1rem;
-  font-weight: 600;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 .thumb {
   width: 200px !important;
