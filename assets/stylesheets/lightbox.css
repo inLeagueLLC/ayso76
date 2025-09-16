@@ -20,7 +20,7 @@
   display: block;
   box-shadow: 0 2px 10px rgba(0,0,0,.15);
   cursor: zoom-in;
-  margin: 0 auto; /* center thumbnails */
+  margin: 0 auto;
 }
 
 /* --- Lightbox Overlay --- */
@@ -41,7 +41,7 @@
   pointer-events: auto;
 }
 
-/* --- Viewer wraps the image --- */
+/* --- Viewer --- */
 .viewer {
   position: relative;
   display: inline-block;
@@ -59,7 +59,7 @@
   opacity: 1;
 }
 
-/* Slide stage */
+/* --- Slide Stage --- */
 .slide-stage {
   position: relative;
   overflow: hidden;
@@ -73,7 +73,7 @@
   border-radius: 12px;
 }
 
-/* Slides */
+/* --- Slides --- */
 .slide {
   position: absolute;
   inset: 0;
@@ -90,18 +90,19 @@
 .to-left    { transform: translateX(-100%); opacity: 0; }
 .to-right   { transform: translateX(100%);  opacity: 0; }
 
-/* Zoom wrapper */
+/* --- Zoom Wrapper --- */
 .zoom-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
   transform: translate(0,0) scale(1);
-  transition: transform 0.2s ease;
   will-change: transform;
 }
 .zoom-wrap img {
-  max-width: 80vw;
-  max-height: 80vh;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
   border-radius: 12px;
   display: block;
 }
@@ -137,7 +138,7 @@
 }
 .control:hover, .btn-close:hover { background: rgba(0,0,0,.7); }
 
-/* --- Accessibility helpers --- */
+/* --- Accessibility --- */
 .visually-hidden {
   position: absolute !important;
   width: 1px; height: 1px;
