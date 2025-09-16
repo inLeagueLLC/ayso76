@@ -9,6 +9,8 @@
 /* Center everything inside each thumbnail block */
 .thumb-block {
   text-align: center;
+  margin: 0 auto;
+  display:block;
 }
 
 /* Style and center the headers */
