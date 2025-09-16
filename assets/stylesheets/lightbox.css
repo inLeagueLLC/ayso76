@@ -134,6 +134,9 @@ img {
   opacity: 0;
   transform: translateX(0);
   transition: transform 0.45s ease-in-out, opacity 0.45s ease-in-out;
+
+  /* 🔑 fix: slides don’t block background taps */
+  pointer-events: none;
 }
 
 .slide.center {
@@ -153,6 +156,9 @@ img {
   object-fit: contain;
   box-shadow: 0 8px 24px rgba(0,0,0,0.6);
   border-radius: 4px;
+
+  /* 🔑 fix: image is still interactive */
+  pointer-events: auto;
 }
 
 /* ================================
@@ -181,7 +187,10 @@ img {
   left: 0;   /* dynamically set by JS */
   top: 0;    /* dynamically set by JS */
   opacity: 0; /* hidden until positioned */
-  pointer-events: none;
+  /* 🔑 fix: always tappable */
+  pointer-events: auto;
+  z-index: 2000;
+
   font-size: clamp(1.1rem, 3vw, 1.6rem);
   font-weight: bold;
   color: #fff;
@@ -193,7 +202,6 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1001;
   transition: background 0.2s ease, transform 0.2s ease, opacity 0.15s ease;
 }
 
