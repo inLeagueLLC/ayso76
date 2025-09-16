@@ -1,185 +1,150 @@
-/* --- Thumbnails & Layout --- */
-.gallery {
-  max-width: 1000px;
-  margin: 24px auto;
-  padding: 0 16px;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  color: #222;
-}
-/* Center everything inside each thumbnail block */
+/* ================================
+   Gallery Styles (Thumbnails)
+   ================================ */
+
+/* Each thumbnail block stacks vertically with fluid spacing */
 .thumb-block {
-  text-align: center;
-  margin: 0 auto;
-  display:block;
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-bottom: clamp(12px, 3vw, 32px); /* min 12px → scales → max 32px */
 }
 
-/* Style and center the headers */
+/* Thumbnail headers with fluid font sizing */
 .thumb-block h3 {
   display: block;
-  text-align: center;
+  text-align: left;
   font-weight: bold;
   margin: 0 0 8px 0;
+  font-size: clamp(1rem, 2vw, 1.5rem);
 }
 
-/* Center the images */
+/* Thumbnails with fluid scaling */
 .thumb-block img.thumb {
   display: block;
-  margin: 0 auto;   /* centers the image horizontally */
-  max-width: 200px; /* optional: limit size so they’re neat */
+  margin: 0;
+  width: clamp(150px, 40vw, 300px); /* min 150px → fluid → max 300px */
   height: auto;
 }
-.thumb {
-  width: 200px !important;
-  max-width: 200px !important;
-  height: auto !important;
-  border-radius: 8px;
-  display: block;
-  box-shadow: 0 2px 10px rgba(0,0,0,.15);
-  cursor: zoom-in;
-  margin: 0 auto;
+
+/* ================================
+   Lightbox Title
+   ================================ */
+
+/* Title fade-in animation */
+@keyframes fadeInTitle {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Lightbox Overlay --- */
-.lightbox {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,.85);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  opacity: 0;
-  transition: opacity 300ms ease;
-  pointer-events: none;
-}
-.lightbox.open {
-  display: flex;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* --- Viewer --- */
-.viewer {
-  position: relative;
-  display: inline-block;
-  background: radial-gradient(circle, rgba(0,0,0,0.85) 60%, rgba(0,0,0,0) 100%);
-  border-radius: 12px;
-  box-shadow: 0 20px 50px rgba(0,0,0,.6);
-  max-width: 80vw;
-  max-height: 80vh;
-  transform: scale(0.95);
-  opacity: 0;
-  transition: transform 300ms ease, opacity 300ms ease;
-}
-.lightbox.open .viewer {
-  transform: scale(1);
-  opacity: 1;
-}
-
-/* --- Slide Stage --- */
-.slide-stage {
-  position: relative;
-  overflow: hidden;
-  touch-action: none;
-}
-.size-probe {
-  display: block;
-  visibility: hidden;
-  max-width: 80vw;
-  max-height: 80vh;
-  border-radius: 12px;
-}
-
-/* --- Slides --- */
-.slide {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #111;
-  will-change: transform, opacity;
-  transition: transform 320ms ease, opacity 320ms ease;
-}
-.from-right { transform: translateX(100%); opacity: 0; }
-.from-left  { transform: translateX(-100%); opacity: 0; }
-.center     { transform: translateX(0);     opacity: 1; }
-.to-left    { transform: translateX(-100%); opacity: 0; }
-.to-right   { transform: translateX(100%);  opacity: 0; }
-
-/* --- Zoom Wrapper --- */
-.zoom-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: translate(0,0) scale(1);
-  will-change: transform;
-  touch-action: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
-.zoom-wrap img {
-  width: auto;
-  height: auto;
-  max-width: 80vw;   /* default: fit to screen */
-  max-height: 80vh;
-  border-radius: 12px;
-  display: block;
-}
-
-/* --- Controls --- */
-.control,
-.btn-close {
-  position: absolute;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 999px;
-  background: rgba(0,0,0,.5);
-  color: #fff;
-  cursor: pointer;
-}
-.control {
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px; height: 44px;
-  font-size: 22px;
-  line-height: 44px;
-}
-.btn-prev { left: 10px; }
-.btn-next { right: 10px; }
-.btn-close {
-  top: 10px;
-  right: 10px;
-  width: 40px; height: 40px;
-  font-size: 20px;
-}
-.control:hover, .btn-close:hover { background: rgba(0,0,0,.7); }
-
-/* --- Accessibility --- */
-.visually-hidden {
-  position: absolute !important;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px; overflow: hidden;
-  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
-}
-/* Closing animation */
-#lightbox.closing .viewer {
-  transform: translateY(100px);
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-/* Title styling */
+/* Title styling with fluid font size + spacing */
 .lightbox-title {
   color: #fff;
   font-weight: bold;
-  font-size: 1.25rem;
   text-align: center;
-  margin-bottom: 12px;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  margin-bottom: clamp(8px, 2vw, 20px); /* min 8px → fluid → max 20px */
+  opacity: 0;
+  animation: fadeInTitle 0.3s ease forwards;
 }
 
-/* Hide prev/next arrows on mobile */
+/* ================================
+   Lightbox Images
+   ================================ */
+
+/* Image fade/zoom-in animation */
+@keyframes fadeInImage {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.slide.center img {
+  max-width: 80vw;
+  max-height: 80vh;
+  opacity: 0;
+  animation: fadeInImage 0.4s ease forwards;
+}
+
+/* On mobile: expand to full width, but keep safe height */
+@media (max-width: 768px) {
+  .slide.center img {
+    max-width: 100vw !important;
+    max-height: 90vh !important;
+  }
+}
+
+/* ================================
+   Lightbox Controls (Close + Arrows)
+   ================================ */
+
+/* Shared fade-in animation */
+@keyframes fadeInControls {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Close button with fluid scaling */
+.btn-close {
+  position: absolute;
+  top: clamp(8px, 2vw, 20px);
+  right: clamp(8px, 2vw, 20px);
+  font-size: clamp(1.25rem, 4vw, 2rem);
+  font-weight: bold;
+  color: #fff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+
+  /* Animations */
+  opacity: 0;
+  animation: fadeInControls 0.3s ease forwards;
+  animation-delay: 0.2s;
+
+  /* Hover interaction */
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.btn-close:hover {
+  color: #ff4444;
+  transform: scale(1.15);
+}
+
+/* Prev/Next arrows with fluid scaling (desktop only) */
+.control.btn-prev,
+.control.btn-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: bold;
+  color: #fff;
+  background: rgba(0,0,0,0.3);
+  border: none;
+  cursor: pointer;
+  padding: clamp(6px, 1.5vw, 12px);
+  z-index: 1000;
+
+  /* Animations */
+  opacity: 0;
+  animation: fadeInControls 0.3s ease forwards;
+  animation-delay: 0.3s;
+
+  /* Hover interaction */
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+/* Arrow positioning */
+.control.btn-prev { left: clamp(8px, 2vw, 20px); }
+.control.btn-next { right: clamp(8px, 2vw, 20px); }
+
+/* Hover effect for arrows */
+.control.btn-prev:hover,
+.control.btn-next:hover {
+  background: rgba(0,0,0,0.6);
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Hide arrows on mobile */
 @media (max-width: 768px) {
   .control.btn-prev,
   .control.btn-next {
