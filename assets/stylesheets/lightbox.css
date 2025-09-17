@@ -75,34 +75,43 @@ img { max-width: 100%; height: auto; display: block; }
 .slide.to-left    { transform: translateX(-100%); opacity: 0; z-index: 1; }
 .slide.to-right   { transform: translateX(100%);  opacity: 0; z-index: 1; }
 
+/* Figure (image + caption) */
+.slide .figure {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  max-width: 92vw;
+}
 .slide img {
-  max-width: 90vw; max-height: 90vh; object-fit: contain;
+  max-width: 90vw; max-height: 82vh;  /* leave room for caption */
+  object-fit: contain;
   box-shadow: 0 8px 24px rgba(0,0,0,.6); border-radius: 4px;
   pointer-events: auto; /* image handles swipe/tap */
+}
+.slide .caption {
+  color: #fff; text-align: center;
+  font-weight: 600;
+  font-size: clamp(.95rem, 2.2vw, 1.25rem);
+  line-height: 1.3;
+  max-width: min(92vw, 1000px);
+  pointer-events: none; /* caption clicks don’t block background */
+  text-wrap: balance;
 }
 
 /* ================================
    Close Button (X)
    ================================ */
-/* Visible by default in top-right of the stage so it never disappears */
-.lightbox .slide-stage > .btn-close {
+/* visible by default; JS later pins to image corner (no position animation) */
+.lightbox .slide-stage > #lbClose {
   position: absolute;
-  top: 16px;
-  right: 16px;          /* default visible location */
-  opacity: 1;           /* visible by default */
-  pointer-events: auto;
-  z-index: 2000;
-
-  font-size: clamp(1.1rem, 3vw, 1.6rem);
-  font-weight: bold; color: #fff;
-  background: rgba(0,0,0,.45);
-  border: none; border-radius: 50%;
-  width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
-  transition: background .2s ease, transform .2s ease, opacity .15s ease, color .2s ease, left .15s ease, top .15s ease, right .15s ease;
+  top: 16px; right: 16px; opacity: 1; pointer-events: auto;
+  z-index: 2147483647;
+  width: 38px; height: 38px; line-height: 38px;
+  border-radius: 50%; border: none;
+  background: rgba(0,0,0,.55); color: #fff;
+  font-size: 22px; font-weight: 700; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.35);
+  transition: opacity .12s ease, transform .15s ease, background .15s ease;
 }
-.lightbox .slide-stage > .btn-close:hover {
-  background: rgba(0,0,0,.65); color: #ff4444; transform: scale(1.06);
-}
+.lightbox .slide-stage > #lbClose:hover { background: rgba(0,0,0,.65); color: #ff4444; transform: scale(1.06); }
 
 /* ================================
    Arrows
