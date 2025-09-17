@@ -44,9 +44,7 @@ img {
   padding: 24px;
 }
 
-.thumb-block {
-  text-align: left;
-}
+.thumb-block { text-align: left; }
 
 .thumb-block h3 {
   font-weight: bold;
@@ -101,7 +99,7 @@ img {
 }
 
 /* ================================
-   Viewer & Stage (centering)
+   Viewer & Stage (true centering)
    ================================ */
 .viewer {
   position: relative;
@@ -157,11 +155,11 @@ img {
 }
 
 /* ================================
-   Close Button (X) — positioned by JS to image corner
+   Close Button (X) — JS pins to image corner
    ================================ */
 .btn-close {
   position: absolute;           /* JS sets left/top to image’s top-right */
-  left: 0;                      /* (initialized; JS will overwrite) */
+  left: 0;                      /* (initialized; JS overwrites) */
   top: 0;
   opacity: 0;                   /* shown by JS after positioning */
   pointer-events: auto;
