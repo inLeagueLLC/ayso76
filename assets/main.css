@@ -6,7 +6,7 @@ Test GBZ
 .container-fluid {
   border-bottom: 1px solid #D69048;}
 .row {
-  padding-bottom:5px;
+  margin-bottom:5px;
   border-bottom: 4px solid #D69048;}
   
   body {
