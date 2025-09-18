@@ -3,7 +3,10 @@ Test GBZ
  */
 /* Fonts */
 /* Root */
-body {
+.mura-sidebar-state__hidden--right .nav {
+  border-bottom: 4px solid #D69048;}
+  
+  body {
   font-family: "Noto Sans";
   font-size: 16px;
   color: #06121b;
