@@ -50,6 +50,9 @@ section.nav .navbar-nav li {
 section.nav .navbar .wrap-for-mobile-menu.show {
   top: 0;
   width: 70%;
+  position: relative;      /* not fixed to viewport height */
+  height: auto !important; /* expand with menu items */
+  max-height: none !important;
 }
 
 
@@ -91,7 +94,9 @@ nav.navbar {
 .wrap-for-mobile-menu.show {
   z-index: 999999;
   width: 70%;
-  height: auto;
+  position: relative;      /* not fixed to viewport height */
+  height: auto !important; /* expand with menu items */
+  max-height: none !important;
 }
 
 #navbarMobileNav .nav-list li > a {
