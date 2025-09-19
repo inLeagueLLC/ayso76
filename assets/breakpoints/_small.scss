@@ -14,7 +14,9 @@ flex: 0 0 20%;
   section.nav .navbar {
     .wrap-for-mobile-menu.show{
       flex: initial;
-      height: auto;
+      position: relative;      /* not fixed to viewport height */
+      height: auto !important; /* expand with menu items */
+      max-height: none !important;
       top: -64%;
       z-index: 999999;
       width: 50%;
