@@ -3,7 +3,7 @@ Test GBZ
  */
 /* Fonts */
 /* Root */
-.container-fluid {
+body.home .navbar {
   border-bottom: 12px double #D69048;}
   
   body {
