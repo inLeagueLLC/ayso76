@@ -160,12 +160,12 @@ nav.navbar {
   &.show {
     position: absolute;
     background: white;
-    height: 100%;
+    height: auto;
     top: 0;
     left: 0;
     padding: 25px;
     width: 70%;
-    z-index: 9999;
+    z-index: 999999;
     ul.nav-list.nav {
       flex-direction: column;
     }
