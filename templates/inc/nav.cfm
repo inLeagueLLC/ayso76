@@ -158,7 +158,7 @@
             </cfif>
         </ul>
     </li>
-        <li class="nav-item dropdown-toggle"><a class="nav-link" href="/alliance">Alliance</a>
+<!--        <li class="nav-item dropdown-toggle"><a class="nav-link" href="/alliance">Alliance</a>
         <ul class="dropdown-menu dropdown-left">
             <cfset feed = $.getBean('feed').loadBy(name='AllianceSubNavItem')>
             <cfset it = feed.getIterator()>
@@ -172,7 +172,7 @@
             </cfloop>
             </cfif>
         </ul>
-    </li>
+    </li> -->
     <li class="nav-item dropdown-toggle"><a class="nav-link" href="/cup">Cup</a>
         <ul class="dropdown-menu dropdown-menu-lg container-fluid dropdown-left">
                     <cfset feed = $.getBean('feed').loadBy(name='GeneralCupSubNavItem')>
