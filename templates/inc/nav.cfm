@@ -23,7 +23,7 @@
                     <cfset feed = $.getBean('feed').loadBy(name='CompRulesPgSubmenuProgramsNavItem')>
                     <cfset it = feed.getIterator()>
                     <cfif it.hasNext()>
-                    <li class="sub-nav-header">Competition Rules</li>
+                    <li class="sub-nav-header">Region & Competition Rules</li>
                    <cfloop condition="it.hasNext()">
                    <cfset item = it.next()>
                     <li<cfif $.content('contentid') eq item.getContentID()> class="active current"</cfif>>
