@@ -62,14 +62,3 @@
   }
 
   }
-  .row {
-  flex-wrap:no-wrap !important;
-  }
-
-  @media (min-width: 576px) {
-    .col-sm-4 {
-        -ms-flex: 0 0 25%;
-        flex: 0 0 25%;
-        max-width: 25%;
-    }
-  }
