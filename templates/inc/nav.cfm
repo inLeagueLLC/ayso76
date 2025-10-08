@@ -1,7 +1,7 @@
 <cfoutput>
 <ul class="nav-list nav">
    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-    <li class="nav-item dropdown-toggle"><a class="nav-link" href="/program-info">Programs</a>
+    <li class="nav-item dropdown-toggle"><a class="nav-link" href="/program-info">Program Info</a>
         <ul class="dropdown-menu dropdown-menu-lg container-fluid">
             <cfset feed = $.getBean('feed').loadBy(name='GeneralPgSubmenuProgramsNavItem')>
             <cfset it = feed.getIterator()>
