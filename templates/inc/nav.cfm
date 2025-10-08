@@ -35,6 +35,21 @@
                    </cfif>
                 </div>
                 <div class="col-sm-4">
+                    <cfset feed = $.getBean('feed').loadBy(name='CompRulesPgSubmenuProgramsNavItem')>
+                    <cfset it = feed.getIterator()>
+                    <cfif it.hasNext()>
+                    <li class="sub-nav-header">Competition Rules</li>
+                   <cfloop condition="it.hasNext()">
+                   <cfset item = it.next()>
+                    <li<cfif $.content('contentid') eq item.getContentID()> class="active current"</cfif>>
+                        <a target="#item.getTarget()#" href="#item.getURL()#">#HTMLEditFormat(item.getMenuTitle())#</a>
+                        <!--- This is where you can specify how deep you want to go  --->
+                        #$.dspNestedNav(contentID=item.getContentID(), viewDepth=2)#
+                     </li>
+                   </cfloop>
+                   </cfif>
+                </div>
+                <div class="col-sm-4">
                     <cfset feed = $.getBean('feed').loadBy(name='AddProgramsProgramSubNavItem')>
                     <cfset it = feed.getIterator()>
                     <cfif it.hasNext()>
