@@ -33,9 +33,11 @@ img { max-width: 100%; height: auto;}
   flex-direction: column;
   gap: 24px;
   padding: 24px;
+  justify-content: center;       /* centers the row of thumbnails */
+  text-align: center;            /* centers the H3 captions inside */
 }
 
-.thumb-block { text-align: left; }
+.thumb-block { text-align: center; }
 
 /* H3 optional: titles primarily come from data-title on <img> */
 .thumb-block h3 {
