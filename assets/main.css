@@ -722,9 +722,6 @@ footer {
       display:none !important;
     }
   }
-  .row {
-  flex-wrap:no-wrap !important;
-  }
 
   @media (min-width: 576px) {
     .col-sm-4 {
