@@ -735,4 +735,18 @@ footer {
   flex-wrap: nowrap !important;
   }
   }
+  @media (max-width: 991.98px) {
+  .navbar-nav .dropdown-toggle {
+    display: flex;
+    justify-content: space-between; /* keeps text left, arrow right */
+    align-items: center;            /* vertically centers both */
+    white-space: nowrap;            /* prevents wrapping to new line */
+  }
+
+  .navbar-nav .dropdown-toggle::after {
+    flex-shrink: 0;                 /* ensures arrow never wraps */
+    margin-left: 0.4em;             /* add a little space from text */
+  }
+}
+
 /*# sourceMappingURL=main.css.map */
