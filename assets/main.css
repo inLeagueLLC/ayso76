@@ -768,5 +768,22 @@ footer {
     text-overflow: ellipsis;
   }
 }
+@media (max-width: 991.98px) {
+  .navbar-nav .dropdown-toggle {
+    position: relative;
+    padding-right: 2.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .navbar-nav .dropdown-toggle .caret,
+  .navbar-nav .dropdown-toggle svg.caret {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* optional: don't steal taps */
+  }
+}
 
 /*# sourceMappingURL=main.css.map */
