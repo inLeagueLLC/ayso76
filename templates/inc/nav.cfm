@@ -268,7 +268,7 @@
 <script>
 (function () {
   var MOBILE_ONLY = window.matchMedia('(max-width: 991.98px)');
-  var GUARD_MS = 320; // tweak if needed
+  var GUARD_MS = 1000; // tweak if needed
   var guardTimer = null;
 
   function addGuard(scope) {
