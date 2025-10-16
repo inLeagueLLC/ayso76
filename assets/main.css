@@ -735,29 +735,35 @@ footer {
   flex-wrap: nowrap !important;
   }
   }
+/* Mobile only (tweak breakpoint to match your site) */
 @media (max-width: 991.98px) {
-  /* Force link and arrow to share one line */
-  .navbar-nav .nav-item .dropdown-toggle {
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: space-between;
+  /* The link row: keep text on one line and reserve room for the caret */
+  .navbar-nav .dropdown-toggle {
+    position: relative;          /* needed for absolute caret */
+    display: block;              /* full width tap target */
     width: 100%;
-    white-space: nowrap;
+    white-space: nowrap;         /* prevent wrapping */
+    overflow: hidden;            /* allow ellipsis */
+    text-overflow: ellipsis;     /* long labels truncate, not wrap */
+    padding-right: 2.25rem;      /* make space for the caret on the right */
     line-height: 1.3;
-    padding-right: 1.25rem; /* enough room for arrow */
   }
 
-  /* Control arrow itself */
+  /* Put the caret on the right, vertically centered, out of flow */
   .navbar-nav .dropdown-toggle::after {
-    margin-left: 0.4em;
-    flex-shrink: 0;
-    vertical-align: middle;
-    position: relative;
-    top: 0;
+    content: "";                 /* keep Bootstrap caret */
+    position: absolute;
+    right: 0.75rem;              /* matches padding-right above */
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;                   /* kill default margins */
+    float: none !important;      /* override themes that float it */
+    flex: 0 0 auto;              /* defensive, if inline-flex elsewhere */
   }
 
-  /* optional – prevents the arrow from being forced down by long labels */
+  /* Defensive: some themes set text wrapping on .nav-link */
   .navbar-nav .nav-link {
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
