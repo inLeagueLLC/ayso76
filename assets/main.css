@@ -735,4 +735,11 @@ footer {
   flex-wrap: nowrap !important;
   }
   }
+  /* Only affects small screens */
+@media (max-width: 991.98px) {
+  .tap-guard {
+    pointer-events: none !important;
+  }
+}
+
 /*# sourceMappingURL=main.css.map */
