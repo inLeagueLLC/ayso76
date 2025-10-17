@@ -1,9 +1,7 @@
 <cfoutput>
 <ul class="nav-list nav">
    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-    <li class="nav-item dropdown-toggle" data-bs-toggle="dropdown"
-     data-bs-auto-close="outside" data-bs-boundary="viewport"><a class="nav-link" href="/program-info" data-bs-toggle="dropdown"
-     data-bs-auto-close="outside" data-bs-boundary="viewport">Program Info</a>
+    <li class="nav-item dropdown-toggle"><a class="nav-link" href="/program-info">Program Info</a>
         <ul class="dropdown-menu dropdown-menu-lg container-fluid">
             <cfset feed = $.getBean('feed').loadBy(name='GeneralPgSubmenuProgramsNavItem')>
             <cfset it = feed.getIterator()>
@@ -69,9 +67,7 @@
               </div>
         </ul>
     </li>
-    <li class="nav-item dropdown-toggle" data-bs-toggle="dropdown"
-     data-bs-auto-close="outside" data-bs-boundary="viewport"><a class="nav-link" href="/register" data-bs-toggle="dropdown"
-     data-bs-auto-close="outside" data-bs-boundary="viewport">Register</a>
+    <li class="nav-item dropdown-toggle"><a class="nav-link" href="/register">Register</a>
         <ul class="dropdown-menu">
         <cfset feed = $.getBean('feed').loadBy(name='RegistrationSubNavItems')>
         <cfset it = feed.getIterator()>
@@ -87,9 +83,7 @@
         </cfif>
         </ul>
     </li>
-    <li class="nav-item dropdown-toggle" data-bs-toggle="dropdown"
-     data-bs-auto-close="outside" data-bs-boundary="viewport"><a class="nav-link" href="/coach" data-bs-toggle="dropdown"
-     data-bs-auto-close="outside" data-bs-boundary="viewport">Coaches</a>
+    <li class="nav-item dropdown-toggle"><a class="nav-link" href="/coach">Coaches</a>
         <ul class="dropdown-menu">
             <cfset feed = $.getBean('feed').loadBy(name='CoachSubNavItem')>
             <cfset it = feed.getIterator()>
@@ -104,9 +98,7 @@
             </cfif>
         </ul>
     </li>
-    <li class="nav-item dropdown-toggle" data-bs-toggle="dropdown"
-     data-bs-auto-close="outside" data-bs-boundary="viewport"><a class="nav-link" href="/referee" data-bs-toggle="dropdown"
-     data-bs-auto-close="outside" data-bs-boundary="viewport">Referees</a>
+    <li class="nav-item dropdown-toggle"><a class="nav-link" href="/referee">Referees</a>
         <ul class="dropdown-menu">
             <cfset feed = $.getBean('feed').loadBy(name='RefSubNavItem')>
             <cfset it = feed.getIterator()>
@@ -121,9 +113,7 @@
             </cfif>
         </ul>
     </li>
-    <li class="nav-item dropdown-toggle" data-bs-toggle="dropdown"
-     data-bs-auto-close="outside" data-bs-boundary="viewport"><a class="nav-link" href="/volunteer" data-bs-toggle="dropdown"
-     data-bs-auto-close="outside" data-bs-boundary="viewport">Volunteer</a>
+    <li class="nav-item dropdown-toggle"><a class="nav-link" href="/volunteer">Volunteer</a>
         <ul class="dropdown-menu">
             <cfset feed = $.getBean('feed').loadBy(name='VolSubNavItem')>
             <cfset it = feed.getIterator()>
@@ -138,9 +128,7 @@
             </cfif>
         </ul>
     </li>
-    <li class="nav-item dropdown-toggle" data-bs-toggle="dropdown"
-     data-bs-auto-close="outside" data-bs-boundary="viewport"><a class="nav-link" href="/schedules" data-bs-toggle="dropdown"
-     data-bs-auto-close="outside" data-bs-boundary="viewport">Schedules / Fields</a>
+    <li class="nav-item dropdown-toggle"><a class="nav-link" href="/schedules">Schedules / Fields</a>
         <ul class="dropdown-menu">
         <cfset feed = $.getBean('feed').loadBy(name='SchedulesSubNavItem')>
         <cfset it = feed.getIterator()>
@@ -156,9 +144,7 @@
         </ul>
     </li>
 
-    <li class="nav-item dropdown-toggle" data-bs-toggle="dropdown"
-     data-bs-auto-close="outside" data-bs-boundary="viewport"><a class="nav-link" href="/competitive-programs" data-bs-toggle="dropdown"
-     data-bs-auto-close="outside" data-bs-boundary="viewport">Competitive Programs</a>
+    <li class="nav-item dropdown-toggle"><a class="nav-link" href="/competitive-programs">Competitive Programs</a>
         <ul class="dropdown-menu dropdown-menu-lg container-fluid">
             <cfset feed = $.getBean('feed').loadBy(name='PostSeasonSubNavItem')>
             <cfset it = feed.getIterator()>
@@ -225,9 +211,7 @@
         </ul>
     </li>
 
-    <li class="nav-item dropdown-toggle" data-bs-toggle="dropdown"
-     data-bs-auto-close="outside" data-bs-boundary="viewport"><a class="nav-link" href="/cup" data-bs-toggle="dropdown"
-     data-bs-auto-close="outside" data-bs-boundary="viewport">Sportsmanship Cup</a>
+    <li class="nav-item dropdown-toggle"><a class="nav-link" href="/cup">Sportsmanship Cup</a>
         <ul class="dropdown-menu dropdown-menu-lg container-fluid dropdown-left">
                     <cfset feed = $.getBean('feed').loadBy(name='GeneralCupSubNavItem')>
                     <cfset it = feed.getIterator()>
