@@ -745,59 +745,49 @@ footer {
 }
 }
 
-/* adjustable gutter from the viewport edges */
+/* viewport gutter */
 :root { --dd-gutter: 12px; }
 
 /* make the LI a positioning context */
 .navbar .nav-item.dropdown-toggle { position: relative; }
 
-/* HARD guarantee: no right overflow on desktop */
-@media (min-width: 992px) {
-  .navbar .nav-item.dropdown-toggle > .dropdown-menu {
-    right: 0 !important;             /* open inward from the toggle's right edge */
-    left: auto !important;
-    transform: none !important;
+/* hard override for ALL dropdown menus in your navbar */
+.navbar .nav-item.dropdown-toggle > .dropdown-menu,
+.navbar .nav-item.dropdown-toggle > .dropdown-menu[data-bs-popper] {
+  position: absolute;
+  left: 50% !important;                 /* center under the toggle */
+  right: auto !important;               /* cancel any right:0 rules */
+  transform: translateX(-50%) !important;
 
-    /* keep within the viewport */
-    box-sizing: border-box;
-    max-width: calc(100vw - var(--dd-gutter) * 2);
-    width: max-content;
+  box-sizing: border-box;
+  max-width: calc(100vw - var(--dd-gutter) * 2);  /* never exceed viewport */
+  width: max-content;                   /* shrink-to-fit until the cap */
 
-    /* if content is still too wide, allow breaking instead of pushing off-screen */
-    white-space: normal;              /* allow wrapping lines */
-    overflow-wrap: anywhere;          /* break long words/URLs */
-    word-break: break-word;           /* older fallback */
-    overflow-x: auto;                 /* last resort: horizontal scroll */
-    transform-origin: top right;
-    z-index: 1000;
-  }
+  /* allow text to wrap so width doesn't balloon */
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  /* if an item is truly unbreakable, scroll horizontally instead of overflowing */
+  overflow-x: auto;
+
+  transform-origin: top center;
+  z-index: 1000;
 }
 
-/* Safety net on small/medium screens: center under the toggle */
-@media (max-width: 991.98px) {
-  .navbar .nav-item.dropdown-toggle > .dropdown-menu {
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%) !important;
-
-    box-sizing: border-box;
-    max-width: calc(100vw - var(--dd-gutter) * 2);
-    width: max-content;
-
-    white-space: normal;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-    overflow-x: auto;
-    transform-origin: top center;
-    z-index: 1000;
-  }
-}
-
-/* Optional: tiniest phones — tighter gutter */
+/* optional: slightly tighter gutter on tiny phones */
 @media (max-width: 576px) {
-  .navbar .nav-item.dropdown-toggle > .dropdown-menu {
+  .navbar .nav-item.dropdown-toggle > .dropdown-menu,
+  .navbar .nav-item.dropdown-toggle > .dropdown-menu[data-bs-popper] {
     max-width: calc(100vw - 8px);
   }
+}
+
+/* if you previously used .dropdown-menu-end anywhere, neutralize it in the navbar */
+.navbar .dropdown-menu.dropdown-menu-end {
+  right: auto !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
 }
 
 /*# sourceMappingURL=main.css.map */
