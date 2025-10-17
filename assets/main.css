@@ -735,7 +735,7 @@ footer {
   flex-wrap: nowrap !important;
   }
   }
-    @media (max-width: 991px) {
+    @media (max-width: 990px) {
     .row {
   flex-wrap: wrap !important;
   }
