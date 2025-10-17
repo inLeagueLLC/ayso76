@@ -735,6 +735,12 @@ footer {
   flex-wrap: nowrap !important;
   }
   }
+    @media (max-width: 991px) {
+    .row {
+  flex-wrap: wrap !important;
+  }
+  }
+
 /* If your nav bar collapses on smaller screens, you can adjust more aggressively */
 @media (max-width: 769px) {
   .nav-item.dropdown-toggle {
