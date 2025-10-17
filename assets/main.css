@@ -745,49 +745,27 @@ footer {
 }
 }
 
-/* Viewport gutter + extra nudge for left-edge items */
-:root {
-  --dd-gutter: 12px;       /* space from window edges */
-  --dd-left-bias: 28px;    /* extra push to the right for leftmost menus */
-}
-
-/* Make LI the positioning context */
 .navbar .nav-item.dropdown-toggle { position: relative; }
 
-/* Default: centered + capped so nothing can overflow either edge */
-.navbar .nav-item.dropdown-toggle > .dropdown-menu,
-.navbar .nav-item.dropdown-toggle > .dropdown-menu[data-bs-popper] {
-  left: 50% !important;
-  right: auto !important;
-  transform: translateX(-50%) !important;
+.navbar .nav-item.dropdown-toggle > .dropdown-menu {
+  position: absolute;
+  left: 0;                      /* always left-aligned */
+  right: auto;
+  transform: none;
 
+  /* guarantee it stays inside the window */
   box-sizing: border-box;
-  max-width: calc(100vw - var(--dd-gutter) * 2);
+  max-width: calc(100vw - 16px); /* 8px gutter on each side */
   width: max-content;
 
+  /* if content is too wide, let it wrap or scroll */
   white-space: normal;
   overflow-wrap: anywhere;
   word-break: break-word;
   overflow-x: auto;
 
-  transform-origin: top center;
+  transform-origin: top left;
   z-index: 1000;
-}
-
-/* ✔️ Extra nudge for the first N items so they don't look too close to the left edge
-   Adjust -n+2 to -n+3/-n+4 if you want more items biased right.
-   Increase/decrease --dd-left-bias to taste (e.g., 24px, 32px). */
-.navbar .navbar-nav > li.nav-item.dropdown-toggle:nth-child(-n+2) > .dropdown-menu,
-.navbar .navbar-nav > li.nav-item.dropdown-toggle:nth-child(-n+2) > .dropdown-menu[data-bs-popper] {
-  transform: translateX(calc(-50% + var(--dd-left-bias))) !important;
-}
-
-/* Optional: slightly tighter gutter on tiny phones */
-@media (max-width: 576px) {
-  .navbar .nav-item.dropdown-toggle > .dropdown-menu,
-  .navbar .nav-item.dropdown-toggle > .dropdown-menu[data-bs-popper] {
-    max-width: calc(100vw - 8px);
-  }
 }
 
 /*# sourceMappingURL=main.css.map */
