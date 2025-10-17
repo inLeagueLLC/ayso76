@@ -735,8 +735,15 @@ footer {
   flex-wrap: nowrap !important;
   }
   }
-    @media (max-width: 990px) {
-    .row {
+    @media (min-width: 769px) {
+       .col-sm-4 {
+        -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+        flex-grow: 1;
+        max-width: 100%;
+        min-width:250px;
+    }
+ .row {
   flex-wrap: wrap !important;
   }
   }
