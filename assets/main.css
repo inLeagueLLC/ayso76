@@ -745,4 +745,24 @@ footer {
 }
 }
 
+/* --- Keep dropdowns within viewport, no JS needed --- */
+.nav-item.dropdown-toggle .dropdown-menu {
+  position: absolute;
+  left: 50%;                        /* anchor to the middle of the toggle */
+  transform: translateX(-50%);      /* center horizontally */
+  right: auto;
+  max-width: calc(100vw - 16px);    /* never exceed viewport width */
+  width: max-content;               /* fit content up to that limit */
+  overflow-x: auto;                 /* scroll if still too wide */
+  transform-origin: top center;
+  z-index: 1000;                    /* keep it above nav elements */
+}
+
+/* --- Optional: handle small screens more gently --- */
+@media (max-width: 576px) {
+  .nav-item.dropdown-toggle .dropdown-menu {
+    max-width: calc(100vw - 8px);
+  }
+}
+
 /*# sourceMappingURL=main.css.map */
