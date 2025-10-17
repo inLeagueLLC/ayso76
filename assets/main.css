@@ -745,27 +745,43 @@ footer {
 }
 }
 
+/* Keep math predictable */
 .navbar .nav-item.dropdown-toggle { position: relative; }
 
-.navbar .nav-item.dropdown-toggle > .dropdown-menu {
+/* The menu itself must obey the viewport width */
+.navbar .nav-item.dropdown-toggle > .dropdown-menu,
+.navbar .nav-item.dropdown-toggle > .dropdown-menu[data-bs-popper] {
   position: absolute;
-  left: 0;                      /* always left-aligned */
+  left: 0;                /* left-align under the link */
   right: auto;
   transform: none;
 
-  /* guarantee it stays inside the window */
-  box-sizing: border-box;
-  max-width: calc(100vw - 16px); /* 8px gutter on each side */
-  width: max-content;
+  box-sizing: border-box;                       /* include padding in width */
+  max-width: calc(100vw - 16px);                /* hard cap to viewport (8px gutter each side) */
+  width: max-content;                           /* shrink-to-fit content up to cap */
+  overflow-x: auto;                              /* last resort scroll if truly necessary */
+}
 
-  /* if content is too wide, let it wrap or scroll */
+/* 🔑 Allow text to wrap so the menu can actually shrink */
+.navbar .dropdown-menu .dropdown-item {
+  white-space: normal !important;               /* override Bootstrap's nowrap */
+  overflow-wrap: anywhere;                      /* break long words/URLs */
+  word-break: break-word;                       /* extra safety for older browsers */
+}
+
+/* Optional: if your menu has headers or custom rows, let them wrap too */
+.navbar .dropdown-menu .dropdown-header,
+.navbar .dropdown-menu .dropdown-item > span,
+.navbar .dropdown-menu .dropdown-item > a {
   white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  overflow-x: auto;
+}
 
-  transform-origin: top left;
-  z-index: 1000;
+/* Optional: slightly tighter gutter on tiny phones */
+@media (max-width: 576px) {
+  .navbar .nav-item.dropdown-toggle > .dropdown-menu,
+  .navbar .nav-item.dropdown-toggle > .dropdown-menu[data-bs-popper] {
+    max-width: calc(100vw - 8px);
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
