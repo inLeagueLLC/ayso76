@@ -722,8 +722,14 @@ footer {
       display:none !important;
     }
   }
+    .row {
+  flex-wrap: wrap;
+  }
 
   @media (min-width: 992px) {
+    .row {
+  flex-wrap: nowrap !important;
+    }
     .col-sm-4 {
         -ms-flex: 0 0 25%;
         flex: 0 0 25%;
@@ -731,12 +737,6 @@ footer {
         max-width: 100%;
         min-width:250px;
     }
-    .row {
-  flex-wrap: nowrap !important;
-  }
-  }
-    .row {
-  flex-wrap: wrap !important;
   }
 
 /* If your nav bar collapses on smaller screens, you can adjust more aggressively */
