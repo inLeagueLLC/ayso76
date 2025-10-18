@@ -730,18 +730,10 @@ footer {
 @media (min-width: 1200px) {
   .row {
     flex-wrap: nowrap !important; /* wins at ≥992px */
+    min-width:250px;
   }
 }
 
-@media (min-width: 1200px) {
-  .col-sm-4 {
-    -ms-flex: 0 0 25%;
-    flex: 0 0 25%;
-    flex-grow: 1;
-    max-width: 100%;
-    min-width: 250px;
-  }
-}
 /* This is necessary to make the wrapped .row look correct. Removed the width of .col-sm-4 from above. */
 @media (min-width: 992px) {
   .col-sm-4 {
@@ -749,6 +741,7 @@ footer {
     flex: 0 0 25%;
     flex-grow: 1;
     max-width: 100%;
+    min-width:250px;
   }
 }
 
