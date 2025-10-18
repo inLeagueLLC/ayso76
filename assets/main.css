@@ -744,7 +744,7 @@ footer {
         min-width:250px;
     }
  .row {
-  flex-wrap: wrap !important;
+  flex-wrap: wrap;
   }
   }
 
