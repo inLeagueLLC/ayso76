@@ -109,4 +109,29 @@ document.addEventListener('DOMContentLoaded', function () {
   }, { passive: true });
 });
 </script>
+<style>
+/* Show/animate carets only on touch/coarse devices */
+@media (hover: none), (pointer: coarse) {
+  ##navbarMobileNav .nav-list li.has-sub > a {
+    position: relative;
+    padding-right: 1.25rem; /* room for caret */
+  }
+  ##navbarMobileNav .nav-list li.has-sub > a::after {
+    content: "";
+    position: absolute;
+    right: 0.35rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    transition: transform 200ms ease;
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid currentColor; /* small down arrow */
+    pointer-events: none; /* taps go to the link */
+  }
+  ##navbarMobileNav .nav-list li.open > a::after {
+    transform: translateY(-50%) rotate(180deg);
+  }
+}
+</style>
 </cfoutput>
