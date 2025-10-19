@@ -138,38 +138,30 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 <style>
-/* Show/animate carets when:
-   - device is touch/coarse, OR
-   - viewport is narrow (<=992px) so desktop acts like mobile */
 /* === Mobile nav caret + rotate + first-tap pulse (CF-safe: double ##) === */
 
-/* If your framework injects its own caret on generic .dropdown-toggle, hide it by default */
-/* === Mobile nav caret + rotate + first-tap pulse (CF-safe: double ##) === */
+/* Desktop: no overrides — desktop carets/icons remain as-is. */
 
-/* 1) Kill any framework/injected carets on dropdowns */
+/* MOBILE-ONLY rules (<= 991px) */
+@media (hover: none), (pointer: coarse), (max-width: 991px) {
 
+  /* Hide any framework/injected caret on mobile only */
+  .dropdown-toggle::after { display: none !important; }
 
-/* Also hide any inline caret elements some themes add */
-@media (hover: none), (pointer: coarse), (max-width: 992px) {
+  /* Also hide inline caret elements some themes add (mobile only) */
   ##navbarMobileNav .nav-list .dropdown-toggle .caret,
   ##navbarMobileNav .nav-list .dropdown-toggle .caret-icon,
   ##navbarMobileNav .nav-list .dropdown-toggle svg.caret,
   ##navbarMobileNav .nav-list .dropdown-toggle svg.caret-icon {
     display: none !important;
   }
-  .dropdown-toggle::after { display: none !important; }
-}
 
-/* 2) Our single source of truth: caret on li.has-sub > a only */
-@media (hover: none), (pointer: coarse), (max-width: 992px) {
-
-  /* Ensure space for the caret */
+  /* Our single caret (mobile only): draw it on li.has-sub > a */
   ##navbarMobileNav .nav-list li.has-sub > a {
     position: relative;
     padding-right: 1.25rem; /* room for caret */
   }
 
-  /* Draw the caret (triangle) */
   ##navbarMobileNav .nav-list li.has-sub > a::after {
     content: "";
     position: absolute;
@@ -212,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </style>
 </cfoutput>
 <script>
-/* === Mobile dropdown nav: drag-safe + transitions + caret hint (CF-safe) === */
+/* === Mobile dropdown nav: drag-safe + transitions + caret hint (<= 991px) === */
 (function () {
   'use strict';
 
@@ -222,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const MENU_CLASS    = 'dropdown-menu';
   const LINK_SELECTOR = 'a';
 
-  const MOBILE_MAX_WIDTH = 767;  // treat as "mobile"
+  const MOBILE_MAX_WIDTH = 991;  // treat <= 991px as "mobile"
   const DELAY_MS   = 450;        // tap-guard after open/close
   const TOUCH_SLOP = 12;         // px movement allowed to still count as tap
   const ROOT_GUARD_CLASS = 'tap-guard-active';
@@ -234,7 +226,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // Active-pointer state for tap vs drag
   let activePointerId = null;
   let downX = 0, downY = 0, moved = false;
-  let downTarget = null;
 
   // ====== HELPERS ======
   const now      = () => performance.now();
@@ -366,7 +357,6 @@ document.addEventListener('DOMContentLoaded', function () {
     downX = e.clientX;
     downY = e.clientY;
     moved = false;
-    downTarget = e.target;
     // Do not preventDefault; allow natural scrolling.
   }
 
@@ -462,7 +452,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const root = navRoot();
     if (!root) return;
 
-    // Ensure li.has-sub exists wherever there is a submenu (matches your CSS)
+    // Ensure li.has-sub exists wherever there is a submenu (matches CSS)
     root.querySelectorAll('li').forEach(li => {
       if (li.querySelector('.' + MENU_CLASS)) li.classList.add('has-sub');
     });
@@ -532,7 +522,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Caret hint observer
     initCaretHint();
 
-    console.log('Mobile nav loaded: drag-safe taps, transitions, caret hint.');
+    console.log('Mobile nav loaded (<=991px): drag-safe taps, transitions, caret hint.');
   }
 
   if (document.readyState === 'loading') {
