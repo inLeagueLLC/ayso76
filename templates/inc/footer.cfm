@@ -34,13 +34,6 @@
    $('.mobile-collapse').toggleClass('show');
    $('body').toggleClass('absolute-fix');
  });
-/* $(function($) {
-    var widthSize = $( window ).width();
-        if (widthSize <= 768) {
-          $("li.dropdown-toggle a.nav-link").attr('href', "##");
-        }
-    });
-*/
 
 /* --- Mobile dropdown: first tap opens, second tap follows --- */
 /* CF-safe: note the doubled ## in CSS selectors inside strings */
@@ -51,9 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // Only enable on touch/coarse pointers so desktop hover stays normal
   var isTouchLike = window.matchMedia('(hover: none), (pointer: coarse)').matches;
   if (!isTouchLike) return;
-
-  // Do NOT rewrite hrefs; we want second tap to navigate.
-  // Remove any previous code that set href to "##".
 
   // Close siblings
   function closeOthers(currentLI) {
@@ -71,6 +61,9 @@ document.addEventListener('DOMContentLoaded', function () {
   nav.querySelectorAll('.nav-list li > a').forEach(function (link) {
     var submenu = link.nextElementSibling;
     if (!submenu || !submenu.classList.contains('dropdown-menu')) return;
+
+    // NEW: mark parent so CSS can draw/rotate a caret
+    link.parentElement.classList.add('has-sub');
 
     // Accessibility
     link.setAttribute('aria-haspopup', 'menu');
@@ -92,15 +85,12 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       // If already open:
-      // - if this is the second tap on the same link, allow navigation
-      // - otherwise (e.g., switching rapidly), ensure it's marked
       if (!firstTapDone) {
         // Edge case: open but not marked — treat like first tap
         e.preventDefault();
         link.dataset.firstTap = '1';
       } else {
-        // Second tap -> navigate (no preventDefault)
-        // Clear the marker so future interactions behave correctly
+        // Second tap -> navigate
         delete link.dataset.firstTap;
       }
     });
