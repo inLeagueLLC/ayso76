@@ -35,7 +35,6 @@
    $('body').toggleClass('absolute-fix');
  });
 
-<script>
 /* --- Mobile dropdown: 1st click opens, 2nd action follows --- */
 /* Also supports desktop mice when the mobile menu/layout is active */
 /* CF-safe: doubled ## in CSS selectors inside strings */
