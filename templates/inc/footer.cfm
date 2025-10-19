@@ -140,10 +140,11 @@ document.addEventListener('DOMContentLoaded', function () {
 </cfoutput>
 <script>
 (function () {
-  // ====== CONFIG (CF-safe: no # or . in strings) ======
-  const NAV_ROOT_ID  = 'navbarMobileNav';     // was '#navbarMobileNav'
-  const TOGGLE_CLASS = 'dropdown-toggle';     // was '.dropdown-toggle'
-  const MENU_CLASS   = 'dropdown-menu';       // was '.dropdown-menu'
+  // ====== CONFIG (CF-safe) ======
+  const NAV_ROOT_ID  = 'navbarMobileNav';
+  const TOGGLE_CLASS = 'dropdown-toggle';
+  const MENU_CLASS   = 'dropdown-menu';
+  const LINK_SELECTOR = 'a';
   const MOBILE_MAX_WIDTH = 767;
   const DELAY_MS = 450;
   const ROOT_GUARD_CLASS = 'tap-guard-active';
@@ -156,7 +157,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const inGuard  = () => isMobile() && now() < guardUntil;
   const navRoot  = () => document.getElementById(NAV_ROOT_ID);
 
-  // --- guard ---
   function startGuard() {
     if (!isMobile()) return;
     guardUntil = now() + DELAY_MS;
@@ -169,13 +169,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }, DELAY_MS + 10);
   }
 
-  // --- utils ---
   function findMenu(toggleEl) {
     if (!toggleEl) return null;
     const scope = toggleEl.closest('li, .nav-item, .dropdown') || toggleEl;
     return scope ? scope.querySelector('.' + MENU_CLASS) : null;
   }
 
+  // --- Anim helpers ---
   function prepMenuForAnimation(menu) {
     menu.style.overflow = 'hidden';
     menu.style.willChange = 'height, opacity, transform';
@@ -259,18 +259,16 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  function isInside(el, container) {
-    return !!(el && container && container.contains(el));
-  }
-  function getToggleFromTarget(target)    { return target.closest('.' + TOGGLE_CLASS); }
-  function getMenuLinkFromTarget(target)  {
-    const link = target.closest('a');
+  function isInside(el, container) { return !!(el && container && container.contains(el)); }
+  function getToggleFromTarget(target) { return target.closest('.' + TOGGLE_CLASS); }
+  function getMenuLinkFromTarget(target) {
+    const link = target.closest(LINK_SELECTOR);
     if (!link) return null;
     return link.closest('.' + MENU_CLASS) ? link : null;
   }
 
-  // --- handlers ---
-  function onPointerDown(e) {
+  // ====== HANDLERS ======
+  function onPointerDownWithinNav(e) {
     if (!isMobile()) return;
     const root = navRoot();
     if (!root) return;
@@ -279,16 +277,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const clickedToggle   = getToggleFromTarget(target);
     const clickedMenuLink = getMenuLinkFromTarget(target);
 
-    if (!isInside(target, root)) {
-      if (openToggle) { closeAllMenus(); startGuard(); }
-      return;
-    }
-
+    // Tapping a toggle
     if (clickedToggle) {
       if (inGuard() && clickedToggle !== openToggle) {
         e.preventDefault(); e.stopPropagation(); return false;
       }
       const isOpen = clickedToggle.classList.contains('is-open');
+
       if (!isOpen) {
         e.preventDefault(); e.stopPropagation();
         openMenu(clickedToggle);
@@ -299,10 +294,34 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
+    // Tapping a link inside an open menu very soon after open
     if (clickedMenuLink) {
       if (inGuard()) { e.preventDefault(); e.stopPropagation(); return false; }
+      // Close on navigate
       closeAllMenus();
     }
+  }
+
+  // NEW: close on true outside *click* only (not on pointerdown)
+  function onDocumentClick(e) {
+    if (!isMobile()) return;
+    const root = navRoot();
+    if (!root) return;
+    if (!isInside(e.target, root) && openToggle) {
+      closeAllMenus();
+      startGuard();
+    }
+  }
+
+  // Prevent outside-close while scrolling menu:
+  // Stop bubbling of start/end events inside a menu so document click won't see them as outside.
+  function attachMenuScrollGuards(root) {
+    root.querySelectorAll('.' + MENU_CLASS).forEach(m => {
+      m.addEventListener('pointerdown', e => e.stopPropagation(), { passive: true });
+      m.addEventListener('pointerup',   e => e.stopPropagation(), { passive: true });
+      m.addEventListener('click',       e => e.stopPropagation(), true); // capture
+      // Allow natural scrolling
+    });
   }
 
   function onKeyDown(e) {
@@ -318,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // --- init ---
+  // ====== INIT ======
   document.addEventListener('DOMContentLoaded', function () {
     const root = navRoot();
     if (!root) return;
@@ -326,13 +345,14 @@ document.addEventListener('DOMContentLoaded', function () {
     root.querySelectorAll('.' + MENU_CLASS).forEach(m => { m.style.display = 'none'; });
 
     const passiveFalse = { passive: false };
-    root.addEventListener('pointerdown', onPointerDown, passiveFalse);
-    document.addEventListener('pointerdown', onPointerDown, passiveFalse);
+    root.addEventListener('pointerdown', onPointerDownWithinNav, passiveFalse);
+    document.addEventListener('click', onDocumentClick, true); // close on real outside clicks only
     document.addEventListener('keydown', onKeyDown, false);
     window.addEventListener('resize', onResize);
 
-    // sanity check
-    console.log('Mobile nav delay+transition loaded (CF-safe).');
+    attachMenuScrollGuards(root);
+
+    console.log('Mobile nav: scroll-safe guard + transitions loaded.');
   });
 })();
 </script>
