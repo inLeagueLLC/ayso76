@@ -35,15 +35,28 @@
    $('body').toggleClass('absolute-fix');
  });
 
-/* --- Mobile dropdown: first tap opens, second tap follows --- */
-/* CF-safe: note the doubled ## in CSS selectors inside strings */
+<script>
+/* --- Mobile dropdown: 1st click opens, 2nd action follows --- */
+/* Also supports desktop mice when the mobile menu/layout is active */
+/* CF-safe: doubled ## in CSS selectors inside strings */
 document.addEventListener('DOMContentLoaded', function () {
   var nav = document.querySelector('##navbarMobileNav');
   if (!nav) return;
 
-  // Only enable on touch/coarse pointers so desktop hover stays normal
-  var isTouchLike = window.matchMedia('(hover: none), (pointer: coarse)').matches;
-  if (!isTouchLike) return;
+  // When should this logic run?
+  //  - touch/coarse pointers (phones/tablets), OR
+  //  - small viewport (acts like mobile), OR
+  //  - when your mobile menu is actively open (classes you toggle)
+  var mqMobileWidth = window.matchMedia('(max-width: 900px)');
+  function isMobileMenuActive() {
+    return (
+      window.matchMedia('(hover: none), (pointer: coarse)').matches ||
+      mqMobileWidth.matches ||
+      document.body.classList.contains('absolute-fix') ||
+      document.querySelector('.wrap-for-mobile-menu.show') ||
+      document.querySelector('.mobile-collapse.show')
+    );
+  }
 
   // Close siblings
   function closeOthers(currentLI) {
@@ -53,23 +66,28 @@ document.addEventListener('DOMContentLoaded', function () {
         li.classList.remove('open');
         var a = li.querySelector(':scope > a[aria-expanded="true"]');
         if (a) a.setAttribute('aria-expanded', 'false');
+        if (a && a.dataset) delete a.dataset.firstTap;
       }
     });
   }
 
-  // Delegate clicks for parent links that have a submenu
-  nav.querySelectorAll('.nav-list li > a').forEach(function (link) {
+  // Wire up links that own a submenu
+  var links = Array.prototype.slice.call(nav.querySelectorAll('.nav-list li > a'));
+  links.forEach(function (link) {
     var submenu = link.nextElementSibling;
     if (!submenu || !submenu.classList.contains('dropdown-menu')) return;
 
-    // NEW: mark parent so CSS can draw/rotate a caret
+    // mark parent so CSS can draw/rotate a caret
     link.parentElement.classList.add('has-sub');
 
-    // Accessibility
+    // a11y
     link.setAttribute('aria-haspopup', 'menu');
     link.setAttribute('aria-expanded', 'false');
 
+    // CLICK: single click opens when in mobile context
     link.addEventListener('click', function (e) {
+      if (!isMobileMenuActive()) return; // let desktop normal nav work
+
       var li = link.parentElement;
       var isOpen = li.classList.contains('open');
       var firstTapDone = link.dataset.firstTap === '1';
@@ -80,23 +98,46 @@ document.addEventListener('DOMContentLoaded', function () {
         closeOthers(li);
         li.classList.add('open');
         link.setAttribute('aria-expanded', 'true');
-        link.dataset.firstTap = '1'; // mark first tap
+        link.dataset.firstTap = '1'; // mark first click/tap
         return;
       }
 
-      // If already open:
+      // Already open:
       if (!firstTapDone) {
         // Edge case: open but not marked — treat like first tap
         e.preventDefault();
         link.dataset.firstTap = '1';
       } else {
-        // Second tap -> navigate
-        delete link.dataset.firstTap;
+        // Second *click* will be handled by dblclick (mouse) or allow default here (touch)
+        // For touch, we allow the second tap to follow normally.
+        // For mouse, we prevent here so dblclick can take over cleanly.
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+          e.preventDefault();
+        } else {
+          // touch devices: let it navigate
+          delete link.dataset.firstTap;
+        }
       }
+    });
+
+    // DBLCLICK: on desktop mouse while in "mobile" context, navigate
+    link.addEventListener('dblclick', function (e) {
+      if (!isMobileMenuActive()) return;
+      // Only intercept when this link controls a submenu and it is open
+      var li = link.parentElement;
+      if (!li.classList.contains('open')) return;
+
+      e.preventDefault();
+      // clear state
+      delete link.dataset.firstTap;
+      link.setAttribute('aria-expanded', 'false');
+      li.classList.remove('open');
+      // follow the link
+      window.location.href = link.href;
     });
   });
 
-  // Tap outside to close any open menus
+  // Click/tap outside to close
   document.addEventListener('click', function (evt) {
     if (!nav.contains(evt.target)) {
       nav.querySelectorAll('.nav-list li.open').forEach(function (li) {
@@ -107,11 +148,24 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
   }, { passive: true });
+
+  // If the viewport crosses the mobile width boundary, clear stale state
+  mqMobileWidth.addEventListener('change', function () {
+    nav.querySelectorAll('.nav-list li.open').forEach(function (li) {
+      li.classList.remove('open');
+      var a = li.querySelector(':scope > a[aria-expanded="true"]');
+      if (a) a.setAttribute('aria-expanded', 'false');
+      if (a && a.dataset) delete a.dataset.firstTap;
+    });
+  });
 });
 </script>
+
 <style>
-/* Show/animate carets only on touch/coarse devices */
-@media (hover: none), (pointer: coarse) {
+/* Show/animate carets when:
+   - device is touch/coarse, OR
+   - viewport is narrow (<=900px) so desktop acts like mobile */
+@media (hover: none), (pointer: coarse), (max-width: 900px) {
   ##navbarMobileNav .nav-list li.has-sub > a {
     position: relative;
     padding-right: 1.25rem; /* room for caret */
@@ -127,15 +181,13 @@ document.addEventListener('DOMContentLoaded', function () {
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 6px solid currentColor; /* small down arrow */
-    pointer-events: none; /* taps go to the link */
+    pointer-events: none; /* clicks go to the link */
   }
   ##navbarMobileNav .nav-list li.open > a::after {
     transform: translateY(-50%) rotate(180deg);
   }
-  .dropdown-toggle::after {
-  display:none;}
+  .dropdown-toggle::after { display: none; }
 }
-
 </style>
 </cfoutput>
 <script>
