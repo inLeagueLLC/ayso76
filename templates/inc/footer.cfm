@@ -35,17 +35,18 @@
    $('body').toggleClass('absolute-fix');
  });
 
-/* --- Mobile dropdown: 1st click opens, 2nd action follows --- */
-/* Also supports desktop mice when the mobile menu/layout is active */
-/* CF-safe: doubled ## in CSS selectors inside strings */
+/* --- Mobile dropdown behavior: 1st click opens, 2nd click follows link --- */
+/* Works on touch and desktop when in mobile layout */
+/* CF-safe: doubled ## in selectors inside strings */
+
 document.addEventListener('DOMContentLoaded', function () {
   var nav = document.querySelector('##navbarMobileNav');
   if (!nav) return;
 
-  // When should this logic run?
-  //  - touch/coarse pointers (phones/tablets), OR
-  //  - small viewport (acts like mobile), OR
-  //  - when your mobile menu is actively open (classes you toggle)
+  // Treat it as "mobile mode" when either:
+  //  - touch device, OR
+  //  - viewport <= 900px, OR
+  //  - your mobile menu is visibly open
   var mqMobileWidth = window.matchMedia('(max-width: 900px)');
   function isMobileMenuActive() {
     return (
@@ -57,10 +58,9 @@ document.addEventListener('DOMContentLoaded', function () {
     );
   }
 
-  // Close siblings
+  // Close all other open dropdowns
   function closeOthers(currentLI) {
-    var openLis = nav.querySelectorAll('.nav-list li.open');
-    openLis.forEach(function (li) {
+    nav.querySelectorAll('.nav-list li.open').forEach(function (li) {
       if (li !== currentLI) {
         li.classList.remove('open');
         var a = li.querySelector(':scope > a[aria-expanded="true"]');
@@ -70,73 +70,50 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Wire up links that own a submenu
-  var links = Array.prototype.slice.call(nav.querySelectorAll('.nav-list li > a'));
-  links.forEach(function (link) {
+  // Enable first-click open / second-click navigate
+  Array.prototype.slice.call(nav.querySelectorAll('.nav-list li > a')).forEach(function (link) {
     var submenu = link.nextElementSibling;
     if (!submenu || !submenu.classList.contains('dropdown-menu')) return;
 
-    // mark parent so CSS can draw/rotate a caret
+    // mark for caret
     link.parentElement.classList.add('has-sub');
-
-    // a11y
     link.setAttribute('aria-haspopup', 'menu');
     link.setAttribute('aria-expanded', 'false');
 
-    // CLICK: single click opens when in mobile context
     link.addEventListener('click', function (e) {
-      if (!isMobileMenuActive()) return; // let desktop normal nav work
+      if (!isMobileMenuActive()) return; // desktop full nav: do nothing special
 
       var li = link.parentElement;
       var isOpen = li.classList.contains('open');
       var firstTapDone = link.dataset.firstTap === '1';
 
-      // If closed: open and block navigation
+      // FIRST CLICK — open menu
       if (!isOpen) {
         e.preventDefault();
         closeOthers(li);
         li.classList.add('open');
         link.setAttribute('aria-expanded', 'true');
-        link.dataset.firstTap = '1'; // mark first click/tap
+        link.dataset.firstTap = '1';
         return;
       }
 
-      // Already open:
+      // IF OPEN BUT firstTap wasn't marked, treat as first click
       if (!firstTapDone) {
-        // Edge case: open but not marked — treat like first tap
         e.preventDefault();
         link.dataset.firstTap = '1';
-      } else {
-        // Second *click* will be handled by dblclick (mouse) or allow default here (touch)
-        // For touch, we allow the second tap to follow normally.
-        // For mouse, we prevent here so dblclick can take over cleanly.
-        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-          e.preventDefault();
-        } else {
-          // touch devices: let it navigate
-          delete link.dataset.firstTap;
-        }
+        return;
       }
-    });
 
-    // DBLCLICK: on desktop mouse while in "mobile" context, navigate
-    link.addEventListener('dblclick', function (e) {
-      if (!isMobileMenuActive()) return;
-      // Only intercept when this link controls a submenu and it is open
-      var li = link.parentElement;
-      if (!li.classList.contains('open')) return;
-
+      // SECOND CLICK — NAVIGATE
       e.preventDefault();
-      // clear state
       delete link.dataset.firstTap;
       link.setAttribute('aria-expanded', 'false');
       li.classList.remove('open');
-      // follow the link
       window.location.href = link.href;
     });
   });
 
-  // Click/tap outside to close
+  // Close menus when clicking outside
   document.addEventListener('click', function (evt) {
     if (!nav.contains(evt.target)) {
       nav.querySelectorAll('.nav-list li.open').forEach(function (li) {
@@ -148,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }, { passive: true });
 
-  // If the viewport crosses the mobile width boundary, clear stale state
+  // If screen resizes across breakpoint, reset menu
   mqMobileWidth.addEventListener('change', function () {
     nav.querySelectorAll('.nav-list li.open').forEach(function (li) {
       li.classList.remove('open');
