@@ -350,9 +350,5 @@ document.addEventListener('DOMContentLoaded', function () {
 /* Brief visual settle while guard is active (optional) */
 #navbarMobileNav.tap-guard-active { opacity: 0.98; transition: opacity 120ms ease; }
 
-/* If your CSS shows menus by default, keep them hidden until .show is added */
-#navbarMobileNav .dropdown-menu { display: none; }
-#navbarMobileNav .dropdown-menu.show { display: block; }
-
 </style>
 </cfoutput>
