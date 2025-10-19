@@ -36,4 +36,59 @@
     });
 
 </script>
+//This JS is to enable the second tap to follow the links on the mobile navbar.
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const nav = document.querySelector('#navbarMobileNav');
+  if (!nav) return;
+
+  // Only activate this on touch devices / mobile
+  const isTouchLike = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  if (!isTouchLike) return;
+
+  // Close all other open menus
+  function closeOthers(currentLI) {
+    nav.querySelectorAll('.nav-list li.open').forEach(li => {
+      if (li !== currentLI) {
+        li.classList.remove('open');
+        const a = li.querySelector(':scope > a[aria-expanded="true"]');
+        if (a) a.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // Find parent links that have dropdowns and apply behavior
+  nav.querySelectorAll('.nav-list li > a').forEach(link => {
+    const submenu = link.nextElementSibling;
+    if (!submenu || !submenu.classList.contains('dropdown-menu')) return;
+
+    link.setAttribute('aria-haspopup', 'menu');
+    link.setAttribute('aria-expanded', 'false');
+
+    link.addEventListener('click', function (e) {
+      const li = link.parentElement;
+      const isOpen = li.classList.contains('open');
+
+      if (!isOpen) {
+        e.preventDefault(); // first tap = open, do not follow link
+        closeOthers(li);
+        li.classList.add('open');
+        link.setAttribute('aria-expanded', 'true');
+      }
+      // if already open, second tap will follow the link
+    });
+  });
+
+  // Optional: tap outside to close menus
+  document.addEventListener('click', (evt) => {
+    if (!nav.contains(evt.target)) {
+      nav.querySelectorAll('.nav-list li.open').forEach(li => {
+        li.classList.remove('open');
+        const a = li.querySelector(':scope > a[aria-expanded="true"]');
+        if (a) a.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+});
+</script>
 </cfoutput>
