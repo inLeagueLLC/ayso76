@@ -164,6 +164,58 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   .dropdown-toggle::after { display: none; }
 }
+/* === Caret rotate + pulse (integrated with your existing CSS) === */
+/* Your original media block, extended */
+@media (hover: none), (pointer: coarse), (max-width: 900px) {
+  /* Keep your spacing for links that have submenus */
+  ##navbarMobileNav .nav-list li.has-sub > a {
+    position: relative;
+    padding-right: 1.25rem; /* room for caret */
+  }
+
+  /* Your caret (triangle) */
+  ##navbarMobileNav .nav-list li.has-sub > a::after {
+    content: "";
+    position: absolute;
+    right: 0.35rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    transition: transform 200ms ease;
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid currentColor; /* small down arrow */
+    pointer-events: none; /* clicks go to the link */
+  }
+
+  /* Rotate caret when open — supports either li.open or a.is-open */
+  ##navbarMobileNav .nav-list li.open > a::after,
+  ##navbarMobileNav .nav-list li.has-sub > a.is-open::after {
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  /* Hide any framework-provided ::after on .dropdown-toggle */
+  .dropdown-toggle::after { display: none; }
+
+  /* First-tap hint: make the caret pulse briefly AFTER it has opened.
+     We attach .hint-next-tap on the link itself. */
+  ##navbarMobileNav .nav-list li.has-sub > a.hint-next-tap::after {
+    animation: caretPulseOpen 900ms ease-out 0s 1;
+  }
+
+  @keyframes caretPulseOpen {
+    0%   { transform: translateY(-50%) rotate(180deg) scale(1);    opacity: .9; }
+    40%  { transform: translateY(-50%) rotate(180deg) scale(1.15); opacity: 1;  }
+    100% { transform: translateY(-50%) rotate(180deg) scale(1);    opacity: 1;  }
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  ##navbarMobileNav .nav-list li.has-sub > a.hint-next-tap::after {
+    animation: none !important;
+  }
+}
 </style>
 </cfoutput>
 <script>
@@ -445,4 +497,62 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('Mobile nav: drag-safe tap detection + transitions loaded.');
   });
 })();
+/* === Tiny helper: add .hint-next-tap to the parent link when it opens ===
+   Works with your current script that toggles `.is-open` on the dropdown toggle.
+   If your code uses li.open instead, this still works because we attach the
+   hint class to the <a> element when it becomes `.is-open`. */
+(function () {
+  const NAV_ROOT_ID   = 'navbarMobileNav';
+  const TOGGLE_CLASS  = 'dropdown-toggle'; // the element your main script marks is-open on
+
+  function initCaretHint() {
+    const root = document.getElementById(NAV_ROOT_ID);
+    if (!root) return;
+
+    // If your toggles are not the <a> itself, but something wrapping it,
+    // we’ll try to find the nearest link to apply the hint class.
+    function nearestLink(el) {
+      return el && (el.matches('a') ? el : el.querySelector('a'));
+    }
+
+    const obs = new MutationObserver(muts => {
+      for (const m of muts) {
+        if (m.type !== 'attributes' || m.attributeName !== 'class') continue;
+        const el = m.target;
+        if (!el.classList || !el.classList.contains(TOGGLE_CLASS)) continue;
+
+        // When a toggle becomes open, add hint to its link (briefly)
+        if (el.classList.contains('is-open')) {
+          const link = nearestLink(el);
+          if (!link) continue;
+
+          // Add the hint class and auto-remove shortly after
+          link.classList.add('hint-next-tap');
+          clearTimeout(link._hintTimer);
+          link._hintTimer = setTimeout(() => link.classList.remove('hint-next-tap'), 1100);
+
+          // If the user taps/clicks again to navigate, remove immediately
+          const clear = () => link.classList.remove('hint-next-tap');
+          link.addEventListener('pointerdown', clear, { once: true, passive: true });
+          link.addEventListener('click',       clear, { once: true, capture: true });
+        } else {
+          // Closed: clean up
+          const link = nearestLink(el);
+          if (!link) continue;
+          link.classList.remove('hint-next-tap');
+          clearTimeout(link._hintTimer);
+        }
+      }
+    });
+
+    obs.observe(root, { subtree: true, attributes: true, attributeFilter: ['class'] });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCaretHint);
+  } else {
+    initCaretHint();
+  }
+})();
+
 </script>
