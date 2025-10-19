@@ -764,9 +764,4 @@ footer {
     overflow:visible;
 }
 }
-@media (hover: none), (pointer: coarse) {
-  #navbarMobileNav .dropdown-menu { display: none; }
-  #navbarMobileNav li.open > .dropdown-menu { display: block; }
-}
-
 /*# sourceMappingURL=main.css.map */
