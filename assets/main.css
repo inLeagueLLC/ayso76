@@ -325,22 +325,25 @@ nav.navbar {
     border-bottom: 0; }
     #navbarMobileNav .dropdown-menu li {
       padding: 10px 5px !important; }
-      #navbarMobileNav .dropdown-menu li.sub-nav-header {
-        color: #ef832f;
+      #navbarMobileNav .dropdown-menu li.sub-nav-header { //gbz
+        color: #206B70;
         font-family: "Fjalla One";
         text-transform: uppercase;
         font-size: 1.25em; }
-    #navbarMobileNav .dropdown-menu li a {
-      color: #fcc04d;
+    #navbarMobileNav .dropdown-menu li a { //gbz
+      color: #D69048;
       font-weight: 600;
-      font-family: "Noto Sans";
-      font-size: 1.25em !important;
+      font-family: 'Fjalla One';
+      font-size: 1.5em;
       text-transform: uppercase;
       display: inline-block;
-      line-height: 1.18em; }
+      line-height: 1.18em;
+      letter-spacing: 0.05em;
+      padding: 0;
+      text-align: left; }
   #navbarMobileNav .nav-list li {
     padding: 15px 5px; }
-    #navbarMobileNav .nav-list li > a {
+    #navbarMobileNav .nav-list > li > a { //gbz
       color: #06121b;
       font-family: 'Fjalla One';
       text-transform: uppercase;
