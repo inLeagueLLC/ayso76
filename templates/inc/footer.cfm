@@ -132,6 +132,8 @@ document.addEventListener('DOMContentLoaded', function () {
   ##navbarMobileNav .nav-list li.open > a::after {
     transform: translateY(-50%) rotate(180deg);
   }
+  .dropdown-toggle::after {
+  display:none;}
 }
 </style>
 </cfoutput>
