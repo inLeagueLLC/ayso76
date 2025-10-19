@@ -146,7 +146,6 @@
 
     <li class="nav-item dropdown-toggle"><a class="nav-link" href="/competitive-programs">Competitive Programs</a>
         <ul class="dropdown-menu dropdown-menu-lg container-fluid dropdown-left">
-                <a class="nav-link" href="/competitive-programs">Competitive Programs</a>
                 <cfset feed = $.getBean('feed').loadBy(name='PostSeasonSubNavItem')>
             <cfset it = feed.getIterator()>
             <cfif it.hasNext()>
