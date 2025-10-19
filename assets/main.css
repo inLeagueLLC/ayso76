@@ -326,12 +326,12 @@ nav.navbar {
     #navbarMobileNav .dropdown-menu li {
       padding: 10px 5px !important; }
       #navbarMobileNav .dropdown-menu li.sub-nav-header {
-        color: #206B70;
+        color: #ef832f;
         font-family: "Fjalla One";
         text-transform: uppercase;
         font-size: 1.25em; }
-    .dropdown-menu li a {
-      color: #D69048;
+    #navbarMobileNav .dropdown-menu li a {
+      color: #fcc04d;
       font-weight: 600;
       font-family: "Noto Sans";
       font-size: 1.25em !important;
@@ -341,7 +341,7 @@ nav.navbar {
   #navbarMobileNav .nav-list li {
     padding: 15px 5px; }
     #navbarMobileNav .nav-list li > a {
-    //gbz color: #06121b;
+      color: #06121b;
       font-family: 'Fjalla One';
       text-transform: uppercase;
       font-size: 1.5em;
@@ -355,7 +355,7 @@ nav.navbar {
     position: relative;
     width: 100%; }
 
-  #navbarNav .dropdown-menu.dropdown-left {
+#navbarNav .dropdown-menu.dropdown-left {
   left: auto;
   right: 0; }
 
