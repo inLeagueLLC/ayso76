@@ -108,7 +108,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }, { passive: true });
 });
-
+</script>
+<script>
 //Start section of code for smooth transition of mobile navbar and delay effects.
 (function () {
   // ====== CONFIG (no # or . so CF won't parse them) ======
