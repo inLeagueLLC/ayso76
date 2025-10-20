@@ -1,4 +1,4 @@
-/* === YouTube Lightbox Popup (CMS-safe, final) === */
+/* === YouTube Lightbox Popup (FINAL, CMS-safe) === */
 
 /* Inline layout: text → arrow → icon */
 .yt-inline {
@@ -10,38 +10,43 @@
   white-space: nowrap;
 }
 
-/* LONG ARROW (shaft + head combined) */
+/* Clickable text + LONG ARROW */
 .yt-text {
+  font-size: 1rem;
+  color: #000; /* change to your brand color if desired */
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
   position: relative;
   display: inline-flex;
   align-items: center;
 }
 
+/* LONG ARROW (shaft + head — single pseudo-element) */
 .yt-text::after {
   content: "";
   display: inline-block;
-  margin-left: 10px;          /* space after the sentence */
-  width: 28px;                /* total arrow length */
-  height: 2px;                /* shaft thickness */
-  background: currentColor;   /* shaft color (matches text) */
+  margin-left: 10px;         /* space after sentence */
+  width: 32px;               /* arrow shaft length */
+  height: 2px;               /* shaft thickness */
+  background: currentColor;  /* shaft color */
   position: relative;
   top: 0;
 }
 
-/* arrowhead */
 .yt-text::after {
-  /* place a triangle at the right end of the shaft */
-  box-shadow: 28px 0 currentColor;
+  /* Add arrowhead at the end of the shaft */
+  box-shadow: 32px 0 currentColor;
   clip-path: polygon(0 0, 100% 50%, 0 100%);
-  width: 12px;                /* arrowhead width */
-  height: 8px;                /* arrowhead height */
-  margin-left: 6px;           /* spacing between shaft and head */
+  width: 12px;              /* arrowhead width */
+  height: 8px;              /* arrowhead height */
+  margin-left: 6px;
   background: currentColor;
-  position: relative;
-  top: -2px;                  /* vertical centering */
+  transform: translateY(-2px); /* vertical alignment */
 }
 
-/* YouTube Play Icon (simple <img>) */
+/* YouTube Play Icon (normal <img>) */
 .yt-img {
   display: inline-block;
   width: 36px;
@@ -140,7 +145,7 @@ body.yt-no-scroll {
   to { transform: scale(1); }
 }
 
-/* Reduced motion support */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .yt-overlay.is-open,
   .yt-dialog {
