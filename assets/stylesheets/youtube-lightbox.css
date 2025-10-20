@@ -10,41 +10,35 @@
   white-space: nowrap;
 }
 
-/* Clickable text + long arrow */
+/* LONG ARROW (shaft + head combined) */
 .yt-text {
-  font-size: 1rem;
-  color: #000; /* change to brand color if desired */
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  outline: none;
   position: relative;
   display: inline-flex;
   align-items: center;
 }
 
-/* LONG ARROW (shaft) */
-.yt-text::before {
-  content: "";
-  display: inline-block;
-  width: 22px;              /* shaft length */
-  height: 2px;              /* shaft thickness */
-  background: currentColor; /* inherits text color */
-  margin-left: 10px;        /* gap after text */
-  margin-right: 6px;        /* space before arrowhead */
-  vertical-align: middle;
-}
-
-/* LONG ARROW (head) */
 .yt-text::after {
   content: "";
   display: inline-block;
-  width: 10px;              /* arrowhead width */
-  height: 8px;              /* arrowhead height */
-  background: currentColor;
+  margin-left: 10px;          /* space after the sentence */
+  width: 28px;                /* total arrow length */
+  height: 2px;                /* shaft thickness */
+  background: currentColor;   /* shaft color (matches text) */
+  position: relative;
+  top: 0;
+}
+
+/* arrowhead */
+.yt-text::after {
+  /* place a triangle at the right end of the shaft */
+  box-shadow: 28px 0 currentColor;
   clip-path: polygon(0 0, 100% 50%, 0 100%);
-  vertical-align: middle;
-  transform: translateY(-1px); /* centers the arrowhead */
+  width: 12px;                /* arrowhead width */
+  height: 8px;                /* arrowhead height */
+  margin-left: 6px;           /* spacing between shaft and head */
+  background: currentColor;
+  position: relative;
+  top: -2px;                  /* vertical centering */
 }
 
 /* YouTube Play Icon (simple <img>) */
