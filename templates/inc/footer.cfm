@@ -205,7 +205,66 @@ document.addEventListener('DOMContentLoaded', function () {
         40%  { transform: scale(1.28); opacity: 1; }
           100% { transform: scale(1); opacity: 1; }
   }
+/* Replace the ::after caret with a real, tappable caret button */
+##navbarMobileNav .nav-list li.has-sub > a::after {
+    display: none !important; /* hide the pseudo-caret */
+}
 
+/* Create a real caret hit target */
+##navbarMobileNav .nav-list li.has-sub > a {
+    position: relative;
+      padding-right: 1.75rem; /* a bit more room for the caret hit area */
+}
+
+/* The tappable caret element we'll inject via JS */
+##navbarMobileNav .nav-list li.has-sub > a .mobile-caret {
+    position: absolute;
+      right: 0.35rem;
+        top: 50%;
+          transform: translateY(-50%) rotate(0deg);
+            transition: transform 200ms ease;
+              width: 22px;
+                height: 22px;
+                  display: inline-flex;
+                    align-items: center;
+                      justify-content: center;
+                        pointer-events: auto; /* ensure taps go to the caret span */
+                          -webkit-tap-highlight-color: transparent;
+}
+
+/* Draw the triangle arrow */
+##navbarMobileNav .nav-list li.has-sub > a .mobile-caret::before {
+    content: "";
+      display: block;
+        width: 0; height: 0;
+          border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+              border-top: 8px solid currentColor; /* down arrow */
+}
+
+/* Rotate caret when its parent toggle (the LI/.dropdown-toggle) is open */
+##navbarMobileNav .nav-list .dropdown-toggle.is-open > a .mobile-caret {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Keep your first-tap pulse for the whole link */
+##navbarMobileNav .nav-list li.has-sub > a.hint-next-tap {
+    animation: linkPulseOpen 900ms ease-out 120ms 1 both;
+      display: inline-block;
+        transform-origin: center;
+}
+@keyframes linkPulseOpen {
+    0%   { transform: scale(1); opacity: .95; }
+      40%  { transform: scale(1.28); opacity: 1; }
+        100% { transform: scale(1); opacity: 1; }
+}
+}
+}
+}
+}
+}
+}
+}
   /* Respect reduced motion */
   @media (prefers-reduced-motion: reduce) {
       ##navbarMobileNav .nav-list li.has-sub > a.hint-next-tap {
