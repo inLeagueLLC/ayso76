@@ -260,7 +260,7 @@ nav.navbar {
     padding: 6px 0; }
     #navbarNav .dropdown-menu li.sub-nav-header {
       color: #206B70;
-      font-family: "Fjalla One";
+      font-family: 'Fjalla One';
       text-transform: uppercase; }
 
  /*GBZ*/
@@ -268,7 +268,7 @@ nav.navbar {
    #navbarNav .dropdown-menu li a {
     color: #D69048;
     font-weight: 600;
-    font-family: "Fjalla One";
+    font-family: 'Fjalla One';
     font-size: 1.5em;
     text-transform: uppercase;
     display: inline-block;
@@ -277,7 +277,7 @@ nav.navbar {
 .nav-toggler-title {
   color: #06121b;
   text-transform: uppercase;
-  font-family: "Fjalla One";
+  font-family: 'Fjalla One';
   margin-top: 5px;
   display: inline-block;
   padding-right: 4px; }
