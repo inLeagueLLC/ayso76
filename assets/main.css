@@ -1,4 +1,4 @@
- /* Colors
+/* Colors
 Test GBZ
  */
 /* Fonts */
@@ -249,8 +249,6 @@ nav.navbar {
         color: #ef832f;
         text-decoration: none; }
 
- /*GBZ*/
-
 #navbarNav .dropdown-menu {
   padding: 15px 20px;
   margin-top: 0;
@@ -260,16 +258,13 @@ nav.navbar {
     padding: 6px 0; }
     #navbarNav .dropdown-menu li.sub-nav-header {
       color: #206B70;
-      font-family: 'Fjalla One';
+      font-family: "Fjalla One";
       text-transform: uppercase; }
-
- /*GBZ*/
-
-   #navbarNav .dropdown-menu li a {
+  #navbarNav .dropdown-menu li a {
     color: #D69048;
     font-weight: 600;
-    font-family: 'Fjalla One';
-    font-size: 1.5em;
+    font-family: "Noto Sans";
+    font-size: .9em;
     text-transform: uppercase;
     display: inline-block;
     line-height: 1.18em; }
@@ -277,7 +272,7 @@ nav.navbar {
 .nav-toggler-title {
   color: #06121b;
   text-transform: uppercase;
-  font-family: 'Fjalla One';
+  font-family: "Fjalla One";
   margin-top: 5px;
   display: inline-block;
   padding-right: 4px; }
@@ -338,8 +333,8 @@ nav.navbar {
     #navbarMobileNav .dropdown-menu li a { 
       color: #D69048;
       font-weight: 600;
-      font-family: 'Noto Sans';
-      font-size: .9em;
+      font-family: 'Fjalla One';
+      font-size: 1.5em;
       text-transform: uppercase;
       display: inline-block;
       line-height: 1.18em;
