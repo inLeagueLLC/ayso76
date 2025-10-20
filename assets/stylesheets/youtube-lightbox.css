@@ -1,6 +1,6 @@
-/* === YouTube Lightbox Popup (CMS-safe, no <img src> needed) === */
+/* === YouTube Lightbox Popup (CMS-safe, final image-based version) === */
 
-/* Inline single-line layout: text → arrow → icon */
+/* Inline layout: text → arrow → icon */
 .yt-inline {
   display: flex;
   align-items: center;
@@ -10,7 +10,7 @@
   white-space: nowrap;
 }
 
-/* Clickable text trigger */
+/* Clickable text */
 .yt-text {
   font-size: 1rem;
   color: #000;
@@ -24,27 +24,23 @@
   text-decoration: underline;
 }
 
-/* Arrow (SVG) — inherits text color */
+/* Arrow */
 .yt-arrow {
   display: inline-block;
   vertical-align: middle;
   margin-left: 2px;
 }
 
-/* YouTube Play Icon — drawn by CSS background, not HTML <img> */
+/* YouTube Play Icon (normal <img>) */
 .yt-img {
   display: inline-block;
   width: 36px;
   height: 36px;
+  cursor: pointer;
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0,0,0,.15);
-  cursor: pointer;
-  transition: transform .15s ease, box-shadow .2s ease, opacity .2s ease;
+  transition: transform .15s ease, box-shadow .2s ease;
   vertical-align: middle;
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAAA60lEQVRYhe3Xuw3CMBiG4V+CwaDoPBDoHoOUg/oEdxC3QA3QKugm6AyUHTFAPcxB8oNDFIfkOanFEf68tcSZM/8dwQAAGPPqnWo7/TXo+j9vp6xRjTjDaZr05jBmXUQBc2i3m6jKx5hp4JK6WUdz6mDqC4oOir4kPki6I9w7xvCBq6zOefqJgK6rA4lIpxgCRPgmYPg0Z4AnIr4K1jzg4x0GZga6jS8gDXkSbgYE2OSBR3Y6qXYgqz0kq1TseQXdxtz3mY8P3joN0zkYFbpSpvy5yP75bx5n7ys8Wl8VqfEv8lCwAAAABJRU5ErkJggg==");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
 }
 .yt-img:hover,
 .yt-img:focus-visible {
@@ -71,7 +67,7 @@
   animation: ytFadeIn .18s ease forwards;
 }
 
-/* Dialog container */
+/* Dialog */
 .yt-dialog {
   position: relative;
   width: min(92vw, 960px);
@@ -108,7 +104,7 @@
   transform: scale(1.05);
 }
 
-/* YouTube iframe wrapper */
+/* Iframe wrapper */
 .yt-frame-wrap {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -121,7 +117,7 @@
   border: 0;
 }
 
-/* Prevent page scroll when open */
+/* Prevent page scroll when lightbox is open */
 body.yt-no-scroll {
   overflow: hidden;
 }
@@ -134,7 +130,7 @@ body.yt-no-scroll {
   to { transform: scale(1); }
 }
 
-/* Reduced motion accessibility */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .yt-overlay.is-open,
   .yt-dialog {
