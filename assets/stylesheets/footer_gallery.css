@@ -1,5 +1,5 @@
 /* ===========================
-   Region 76 Hero Gallery – Full CSS (Row Wings + Glint)
+   Region 76 Hero Gallery – Full CSS (Row Wings + Outward Glint)
    =========================== */
 
 /* ====== Layout Row (wings live here) ====== */
@@ -30,7 +30,10 @@
   transform: translateY(-50%);
   height: 2px; /* match gallery border */
   pointer-events: none;
-  /* Two layers: 1) moving glint (first), 2) constant base gold (second) */
+
+  /* Two layers:
+     1) moving glint (first)
+     2) constant base gold (second) */
   background-repeat: no-repeat, no-repeat;
   background-size: 16vw 4px, 100% 2px;  /* glint size, base size */
   box-shadow:
@@ -50,9 +53,10 @@
       rgba(214,144,72,0.25) 60%,
       rgba(214,144,72,0.00) 100%
     );
+  /* Start glint at the gallery edge (right end) */
   background-position:
-    -20vw 50%, /* glint off-screen at start */
-    0 50%;     /* base line pinned */
+    100% 50%,
+    0 50%;
 }
 
 /* Right wing: gallery’s right edge → viewport right */
@@ -67,8 +71,9 @@
       rgba(214,144,72,0.25) 60%,
       rgba(214,144,72,0.00) 100%
     );
+  /* Start glint at the gallery edge (left end) */
   background-position:
-    20vw 50%,  /* glint off-screen at start */
+    0% 50%,
     0 50%;
 }
 
@@ -80,22 +85,22 @@
     0 0 26px rgba(214, 144, 72, 0.70);
 }
 
-/* Glint sweeps only (base line never fades) */
-@keyframes r76-glint-left {
-  0%   { background-position: -20vw 50%, 0 50%; }
-  100% { background-position: 130% 50%, 0 50%; }
+/* Outward glint sweeps (base line never fades) */
+@keyframes r76-glint-left-out {
+  0%   { background-position: 100% 50%, 0 50%; }
+  100% { background-position: -30% 50%, 0 50%; }  /* sweep leftwards */
 }
-@keyframes r76-glint-right {
-  0%   { background-position: 20vw 50%, 0 50%; }
-  100% { background-position: -130% 50%, 0 50%; }
+@keyframes r76-glint-right-out {
+  0%   { background-position: 0% 50%, 0 50%; }
+  100% { background-position: 130% 50%, 0 50%; }  /* sweep rightwards */
 }
 
-/* JS toggles .pulse-shimmer on the row for one sweep */
+/* JS toggles .pulse-shimmer on the row for one outward sweep */
 .r76-row.pulse-shimmer::before {
-  animation: r76-glint-left var(--fade-ms, 2500ms) ease-out 1;
+  animation: r76-glint-left-out var(--fade-ms, 2500ms) ease-out 1;
 }
 .r76-row.pulse-shimmer::after {
-  animation: r76-glint-right var(--fade-ms, 2500ms) ease-out 1;
+  animation: r76-glint-right-out var(--fade-ms, 2500ms) ease-out 1;
 }
 
 /* ====== Gallery Frame ====== */
