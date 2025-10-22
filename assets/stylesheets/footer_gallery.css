@@ -1,8 +1,9 @@
 /* ===========================
-   Region 76 Gallery (Synced)
+   Region 76 Gallery (Synced, 70vw max)
    - Frame resizes with each image (width & height animate)
    - Crossfade & size transitions share the same duration (--fade-ms)
    - 14px rounded corners, hover glow, zoom, captions
+   - Capped to 70% of the viewport width
    =========================== */
 
 /* Gallery frame (root). JS sets width/height per image. */
@@ -22,8 +23,9 @@
     height var(--fade-ms, 900ms) ease,
     box-shadow 220ms ease,
     transform 220ms ease;
-  max-width: 100%;               /* don’t overflow layout */
-  height: auto;                  /* JS will control height per image */
+  /* Cap to 70% of viewport width */
+  max-width: 70vw;
+  height: auto;                  /* JS controls height per image */
 }
 
 /* Hover glow on the frame */
