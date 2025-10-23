@@ -13,14 +13,25 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   border-radius: 12px;
   overflow: hidden;
   background: transparent;
-
   border: 1px solid rgba(0,0,0,.14);
 
-  box-shadow: none;
+  /* Floating hover-shadow (default resting state) */
+  transition: transform 0.35s ease, filter 0.35s ease;
   filter:
     drop-shadow(0 20px 45px rgba(0, 0, 0, 0.32))
     drop-shadow(0 4px 12px rgba(0, 0, 0, 0.22))
     drop-shadow(0 0 18px rgba(0, 0, 0, 0.12));
+}
+
+/* Hover lift & deeper shadow (desktop only) */
+@media (hover: hover) and (pointer: fine) {
+  .r76-wrap:hover {
+    transform: translateY(-4px) scale(1.01); /* subtle lift */
+    filter:
+      drop-shadow(0 26px 55px rgba(0, 0, 0, 0.38))
+      drop-shadow(0 6px 16px rgba(0, 0, 0, 0.25))
+      drop-shadow(0 0 22px rgba(0, 0, 0, 0.18));
+  }
 }
 
 /* Carousel core */
@@ -43,7 +54,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   cursor: pointer;
 }
 
-/* Images: responsive, never exceed viewport width */
+/* Images: responsive, never exceed viewport width + ZOOM EFFECT */
 .carousel-slide img {
   display: block;
   width: 100%;
@@ -51,6 +62,14 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   height: auto;
   max-height: 100vh;
   object-fit: contain;
+  transition: transform 1.2s ease; /* 1200ms zoom */
+}
+
+/* Zoom on hover (desktop only) */
+@media (hover: hover) and (pointer: fine) {
+  .carousel-slide:hover img {
+    transform: scale(1.06);
+  }
 }
 
 /* Full-width caption band pinned to bottom */
@@ -181,22 +200,5 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   .carousel-button img {
     width: 45px;
     height: 45px;
-  }
-}
-/* --- Image zoom-on-hover (desktop only) --- */
-.carousel-slide img {
-  transition: transform 1200ms ease;  /* smooth animation */
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .carousel-slide:hover img {
-    transform: scale(1.06);  /* slight zoom without affecting the frame */
-  }
-  .r76-wrap:hover {
-    transform: translateY(-4px) scale(1.01); /* subtle lift */
-    filter:
-      drop-shadow(0 26px 55px rgba(0, 0, 0, 0.38))
-      drop-shadow(0 6px 16px rgba(0, 0, 0, 0.25))
-      drop-shadow(0 0 22px rgba(0, 0, 0, 0.18));
   }
 }
