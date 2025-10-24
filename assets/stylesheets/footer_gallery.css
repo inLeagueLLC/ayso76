@@ -1,8 +1,8 @@
 /* ===========================
    Region 76 Hero Gallery – Full CSS (Row Wings + Outward Glint)
    - Hover zoom only on hover-capable devices
-   - Hover zoom timing/easing driven by CSS vars from JS:
-       --hover-zoom-ms, --hover-zoom-ease
+   - Timing/easing/scale driven by CSS vars set from JS:
+       --hover-zoom-ms, --hover-zoom-ease, --hover-zoom-scale
    =========================== */
 
 /* ====== Layout Row (wings live here) ====== */
@@ -161,7 +161,7 @@
 /* Only apply hover zoom on devices that actually support hover */
 @media (hover: hover) and (pointer: fine) {
   .r76-gallery:hover .r76-layer.show > img {
-    transform: scale(1.03);
+    transform: scale(var(--hover-zoom-scale, 1.03));
   }
 }
 
