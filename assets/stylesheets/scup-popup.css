@@ -14,35 +14,41 @@
   --r76-border: rgba(0,0,0,.08);
 }
 
-/* --- Trigger link with arrow icon --- */
-.r76-login-query-trigger {
+/* Make the trigger fully inherit your H4 typography and color */
+.r76-trigger-heading { margin: 0 0 0.5em; } /* optional: keep your normal h4 spacing */
+.r76-trigger-heading .r76-login-query-trigger {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: var(--r76-text);
-  text-decoration: none;
-  transition: color 0.2s ease, transform 0.15s ease;
+  font: inherit;             /* size, weight, family from your H4 */
+  line-height: inherit;
+  color: inherit;            /* use your H4 color */
+  text-decoration: none;     /* default: no underline */
 }
 
-.r76-login-query-trigger:hover {
-  color: var(--r76-accent-hover);
-  transform: translateX(2px);
-  text-decoration: underline;
+/* Remove all shifting on hover (no translate) */
+.r76-trigger-heading .r76-login-query-trigger:hover {
+  color: inherit;            /* keep same color unless your H4 hover rules change it */
+  text-decoration: underline;/* optional: underline without shifting layout */
 }
 
-.r76-login-query-trigger img.r76-arrow-icon {
+/* Arrow image: no movement on hover */
+.r76-trigger-heading .r76-login-query-trigger .r76-arrow-icon {
   display: inline-block;
   vertical-align: middle;
-  margin-top: -1px;
-  opacity: 0.85;
-  transition: opacity 0.2s ease, transform 0.15s ease;
+  margin-top: -1px;          /* subtle optical alignment */
+  opacity: 0.95;
+  transition: opacity .15s ease;  /* no transform */
+}
+.r76-trigger-heading .r76-login-query-trigger:hover .r76-arrow-icon {
+  opacity: 1;                /* brighten only; no movement */
 }
 
-.r76-login-query-trigger:hover img.r76-arrow-icon {
-  opacity: 1;
-  transform: translateX(2px);
+/* Optional: keyboard focus ring that doesn’t shift layout */
+.r76-trigger-heading .r76-login-query-trigger:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* --- Screen reader utility --- */
