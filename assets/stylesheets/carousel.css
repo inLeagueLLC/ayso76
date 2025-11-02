@@ -194,3 +194,18 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 @media (max-width: 768px) {
   .carousel-button img { width: 45px; height: 45px; }
 }
+/* Smaller allowed caption sizes on narrow screens */
+@media (max-width: 480px) {
+  :root {
+    --r76-title-min: 14px;      /* was 16px */
+    --r76-subtitle-min: 10px;   /* was 14px */
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --r76-title-min: 12px;
+    --r76-subtitle-min: 9px;
+  }
+}
+
