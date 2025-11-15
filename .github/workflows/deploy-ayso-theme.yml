@@ -1,0 +1,22 @@
+# .github/workflows/deploy-ayso-theme.yml
+name: Deploy ayso-theme
+
+on:
+  push:
+    branches:
+      - main   
+
+jobs:
+  deploy:
+    runs-on: self-hosted  
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          # Rough equivalent of GIT_STRATEGY: fetch
+          fetch-depth: 0
+
+      - name: Sync to /mnt/mura/sites/ayso76/themes/ayso-theme
+        run: |
+          rsync -a --delete --exclude='.git' . /mnt/mura/sites/ayso76/themes/ayso-theme/
