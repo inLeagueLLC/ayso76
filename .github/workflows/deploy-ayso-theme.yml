@@ -17,6 +17,6 @@ jobs:
           # Rough equivalent of GIT_STRATEGY: fetch
           fetch-depth: 0
 
-      - name: Sync to /mnt/mura/sites/ayso76/themes/ayso-theme
+      - name: Sync to /mnt/www/sites/mura/ayso76/themes/ayso-theme
         run: |
           rsync -a --delete --exclude='.git' . /mnt/mura/sites/ayso76/themes/ayso-theme/
