@@ -8,14 +8,16 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+/* Heading — smaller, always one line, grey color */
 .r76-age-tool h3 {
   margin-top: 0;
   margin-bottom: 1.1rem;
   text-align: center;
-  color: #2d2f30;       /* returned to original grey */
-  font-size: 1.55rem;   /* slightly smaller */
+  color: #2d2f30;        /* grey */
+  font-size: 1.3rem;     /* reduced so it fits one line */
   font-weight: 700;
   letter-spacing: 0.3px;
+  white-space: nowrap;   /* prevents wrapping */
 }
 
 .r76-age-row {
@@ -63,24 +65,23 @@
   min-height: 2.25rem;
 }
 
+/* Division result — left aligned, prominent, orange */
 .r76-age-result-main {
   font-weight: 800;
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
-  color: #ef832f;     /* Region 76 orange */
-  text-align: left;   /* left-justified as requested */
+  color: #ef832f;      /* Region 76 orange */
+  text-align: left;    /* left-justified */
 }
 
+/* Footer — fixed small size, two lines max */
 .r76-age-note {
   margin-top: 0.75rem;
   color: #555;
   text-align: center;
 
-  /* Responsive size that adjusts to ensure max two lines */
-  font-size: clamp(0.72rem, 2vw, 0.85rem);
-
-  /* Wrap earlier so text never goes to 3 lines */
-  max-width: 360px;
+  font-size: 0.72rem;   /* fixed, smallest size */
+  max-width: 420px;     /* matches tool width */
   margin-left: auto;
   margin-right: auto;
   line-height: 1.25;
