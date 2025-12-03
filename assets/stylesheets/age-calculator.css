@@ -10,12 +10,12 @@
 
 .r76-age-tool h3 {
   margin-top: 0;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.1rem;
   text-align: center;
-  color: #2d2f30;
-  font-size: 1.8rem;        /* Larger heading */
-  font-weight: 800;         /* Strong emphasis */
-  letter-spacing: 0.5px;
+  color: #2d2f30;       /* returned to original grey */
+  font-size: 1.55rem;   /* slightly smaller */
+  font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
 .r76-age-row {
@@ -44,7 +44,7 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 0.95rem;
-  background: #ef832f;   /* Region 76 orange */
+  background: #ef832f;    /* Region 76 orange */
   color: #fff;
 }
 
@@ -64,16 +64,24 @@
 }
 
 .r76-age-result-main {
-  font-weight: 800;         /* Stronger bold */
-  font-size: 1.4rem;        /* Larger result text */
+  font-weight: 800;
+  font-size: 1.4rem;
   margin-bottom: 0.5rem;
-  color: #ef832f;           /* Region 76 orange */
-  text-align: center;       /* Center highlight */
+  color: #ef832f;     /* Region 76 orange */
+  text-align: left;   /* left-justified as requested */
 }
 
 .r76-age-note {
   margin-top: 0.75rem;
-  font-size: 0.8rem;
   color: #555;
   text-align: center;
+
+  /* Responsive size that adjusts to ensure max two lines */
+  font-size: clamp(0.72rem, 2vw, 0.85rem);
+
+  /* Wrap earlier so text never goes to 3 lines */
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.25;
 }
